@@ -1,2 +1,5 @@
-<p>list works!</p>
-<router-outlet></router-outlet>
+<ul>
+  <li *ngFor="let item of itemList; let i = index">
+    <a [routerLink]="'item-' + i">{{ item }}</a>
+  </li>
+</ul>

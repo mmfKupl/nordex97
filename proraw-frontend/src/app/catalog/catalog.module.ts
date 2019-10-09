@@ -8,7 +8,12 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
 
 @NgModule({
-  declarations: [ListComponent, ItemComponent, CatalogComponent, BlockListComponent],
+  declarations: [
+    ListComponent,
+    ItemComponent,
+    CatalogComponent,
+    BlockListComponent
+  ],
   imports: [CommonModule, CatalogRoutingModule]
 })
 export class CatalogModule {}

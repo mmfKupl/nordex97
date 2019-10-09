@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CatalogDataService } from '../catalog-data.service';
 
 @Component({
   selector: 'app-catalog-list',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  constructor() {}
+  itemList: string[];
+  constructor(private cd: CatalogDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.itemList = this.cd.itemList;
+  }
 }
