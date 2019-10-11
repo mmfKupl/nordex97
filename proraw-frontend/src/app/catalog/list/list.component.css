@@ -16,14 +16,14 @@
 .main__li.sub {
   height: 0;
   z-index: -1;
-  transition: all 1s;
+  transition: all 500ms;
   visibility: hidden;
   transform-origin: top;
 }
 
 .main__li.sub .main__a {
   padding: 0 2rem;
-  transition: all 1s;
+  transition: all 500ms;
   opacity: 0;
   transform-origin: top;
 }
@@ -39,14 +39,23 @@
   opacity: 1;
 }
 
-.main__button {
+.button__span {
   margin-left: auto;
   cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #0562a7;
+  background-color: #508cb9;
   border-radius: 0.3rem;
   outline: none;
+  background-image: url(../../../assets/icons/caret-up-solid.svg);
+  background-repeat: no-repeat;
+  background-position: 45% center;
+  background-size: 60%;
+  transition: transform 500ms;
+}
+
+.main__a.expand .button__span {
+  transform: rotate(180deg);
 }
 
 .main__a {

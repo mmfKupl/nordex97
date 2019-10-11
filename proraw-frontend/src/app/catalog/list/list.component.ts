@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
   itemList: any[];
-  curExpandId: number;
+  curExpandId: {} = {};
   constructor(private cd: CatalogDataService) {}
 
   ngOnInit() {
@@ -17,17 +17,17 @@ export class ListComponent implements OnInit {
   }
 
   setCurExpand(i: number) {
-    this.curExpandId = i;
+    if (i in this.curExpandId) {
+      this.curExpandId[i] = this.curExpandId[i] ? null : i;
+    } else {
+      this.curExpandId[i] = i;
+    }
   }
 
-  setCurExpandToNull() {
-    this.curExpandId = null;
-  }
-
-  getCurClass(expanId: number) {
+  getCurClass(expanId: number, e: Event) {
     if (!expanId) {
       return false;
     }
-    return expanId && this.curExpandId && expanId === this.curExpandId;
+    return this.curExpandId && expanId === this.curExpandId[expanId];
   }
 }

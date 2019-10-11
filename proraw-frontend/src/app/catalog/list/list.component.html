@@ -10,18 +10,14 @@
       [routerLink]="i"
       routerLinkActive="active"
       [class.sub]="item.sub"
-      (click)="item.expandId ? setCurExpand(i) : setCurExpandToNull()"
+      [class.expand]="curExpandId[item.expandId] === item.expandId"
+      (click)="item.expandId ? setCurExpand(i) : null"
     >
       <span class="a__span" [class.dnone]="item.sub">
         <span class="a__span-circle"></span>
         <span class="a__span-line"></span> </span
       ><span>{{ item.title }}</span>
-      <input
-        class="main__button"
-        *ngIf="item.expandId"
-        type="button"
-        (click)="setCurExpand(i)"
-      />
+      <span class="button__span" *ngIf="item.expandId" type="button"></span>
     </a>
   </li>
 </ul>
