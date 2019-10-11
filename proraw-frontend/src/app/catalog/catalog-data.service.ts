@@ -5,9 +5,13 @@ import items from '../../assets/itemList.json';
   providedIn: 'root'
 })
 export class CatalogDataService {
-  itemList: string[];
+  itemList: any[];
 
   constructor() {
     this.itemList = items;
+  }
+
+  getCurItem(pos: number) {
+    return this.itemList[pos] || {};
   }
 }

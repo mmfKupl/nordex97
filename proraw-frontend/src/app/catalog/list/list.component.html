@@ -1,10 +1,21 @@
 <ul class="main__ul">
-  <li class="main__li" *ngFor="let item of itemList; let i = index">
-    <a class="main__a" [routerLink]="i" routerLinkActive="active">
-      <span class="a__span">
+  <li
+    class="main__li"
+    *ngFor="let item of itemList; let i = index"
+    [class.sub]="item.sub"
+    [class.sub-open]="getCurClass(item.expand)"
+  >
+    <a
+      class="main__a"
+      [routerLink]="i"
+      routerLinkActive="active"
+      [class.sub]="item.sub"
+      (click)="item.expandId ? setCurExpand(i) : setCurExpandToNull()"
+    >
+      <span class="a__span" [class.dnone]="item.sub">
         <span class="a__span-circle"></span>
         <span class="a__span-line"></span> </span
-      ><span>{{ item }}</span></a
-    >
+      ><span>{{ item.title }}</span>
+    </a>
   </li>
 </ul>

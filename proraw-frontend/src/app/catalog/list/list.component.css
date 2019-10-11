@@ -8,6 +8,17 @@
   background-color: #0e2b57;
 }
 
+.main__li.sub {
+  height: 0;
+  visibility: hidden;
+}
+
+.main__li.sub-open {
+  visibility: visible;
+  animation: expandSub 1s;
+  height: 100%;
+}
+
 .main__a {
   display: flex;
   width: 100%;
@@ -19,6 +30,14 @@
   transition: background-color 300ms;
 }
 
+.main__a.sub {
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  border-left: 1px solid #d8d4d4;
+  border-right: 1px solid #d8d4d4;
+}
+
 .a__span {
   display: block;
   height: 1rem;
@@ -28,7 +47,7 @@
   opacity: 0.3;
 }
 
-.a__span-line {
+.main__a:not(.sub) .a__span-line {
   display: block;
   position: absolute;
   width: 1px;
@@ -39,7 +58,7 @@
   transition: background-color 500ms;
 }
 
-.main__li:first-child .a__span-line {
+.main__li:first-child .main__a:not(.sub) .a__span-line {
   display: block;
   position: absolute;
   width: 1px;
@@ -49,7 +68,7 @@
   transform: translateX(calc(0.5rem - 1px));
 }
 
-.main__li:last-child .a__span-line {
+.main__li:last-child .main__a:not(.sub) .a__span-line {
   display: block;
   position: absolute;
   width: 1px;
@@ -59,7 +78,7 @@
   transform: translateX(calc(0.5rem - 1px));
 }
 
-.a__span-circle {
+.main__a:not(.sub) .a__span-circle {
   display: block;
   position: absolute;
   height: 1rem;
@@ -73,10 +92,20 @@
   transition: background-color 500ms;
 }
 
-.main__a.active,
-.main__a:hover {
+.main__a:not(.sub).active,
+.main__a:not(.sub):hover {
   color: #fefeff;
   background-color: #0d274e;
+}
+
+.main__a.sub:hover {
+  background-color: #f7f7f7;
+  color: #e95930;
+}
+
+.main__a.sub.active {
+  background-color: #ececec;
+  color: #e95930;
 }
 
 .main__a.active .a__span {
@@ -88,4 +117,16 @@
 }
 .main__a.active .a__span-line {
   visibility: hidden;
+}
+
+@keyframes expandSub {
+  0% {
+    height: 0;
+  }
+  95% {
+    height: 3rem;
+  }
+  100% {
+    height: 100%;
+  }
 }
