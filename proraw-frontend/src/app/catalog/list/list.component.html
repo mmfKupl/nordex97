@@ -16,6 +16,12 @@
         <span class="a__span-circle"></span>
         <span class="a__span-line"></span> </span
       ><span>{{ item.title }}</span>
+      <input
+        class="main__button"
+        *ngIf="item.expandId"
+        type="button"
+        (click)="setCurExpand(i)"
+      />
     </a>
   </li>
 </ul>

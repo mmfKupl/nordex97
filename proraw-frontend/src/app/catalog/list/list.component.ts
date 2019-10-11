@@ -17,9 +17,7 @@ export class ListComponent implements OnInit {
   }
 
   setCurExpand(i: number) {
-    console.log(this.itemList[i]);
     this.curExpandId = i;
-    console.log(this.curExpandId);
   }
 
   setCurExpandToNull() {
@@ -27,9 +25,6 @@ export class ListComponent implements OnInit {
   }
 
   getCurClass(expanId: number) {
-    // console.log(expanId, {
-    //   'sub-open': expanId && this.curExpandId && expanId === this.curExpandId
-    // });
     if (!expanId) {
       return false;
     }
