@@ -6,13 +6,15 @@ import { ListComponent } from './list/list.component';
 import { ItemComponent } from './item/item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
+import { ItemListComponent } from './item-list/item-list.component';
 
 @NgModule({
   declarations: [
     ListComponent,
     ItemComponent,
     CatalogComponent,
-    BlockListComponent
+    BlockListComponent,
+    ItemListComponent
   ],
   imports: [CommonModule, CatalogRoutingModule]
 })

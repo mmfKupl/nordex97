@@ -15,13 +15,11 @@
   margin: 0 auto;
   height: 100%;
 }
-
-.main {
-  background-color: gray;
+.header > .wrapper {
+  padding-bottom: 0;
 }
-
-.footer {
-  background-color: black;
+.main > .wrapper {
+  padding-top: 0;
 }
 
 .header__main {

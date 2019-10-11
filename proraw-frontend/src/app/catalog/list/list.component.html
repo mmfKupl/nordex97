@@ -1,5 +1,7 @@
-<ul>
-  <li *ngFor="let item of itemList; let i = index">
-    <a [routerLink]="'item-' + i">{{ item }}</a>
+<ul class="main__ul">
+  <li class="main__li" *ngFor="let item of itemList; let i = index">
+    <a class="main__a" [routerLink]="i">
+      <span class="a__span"></span><span>{{ item }}</span></a
+    >
   </li>
 </ul>
