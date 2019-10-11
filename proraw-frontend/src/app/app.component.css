@@ -66,7 +66,7 @@
   background-size: 70%;
   background-position: center center;
   background-repeat: no-repeat;
-  margin: 0 2rem;
+  margin: 0 1rem;
   cursor: pointer;
 }
 
@@ -94,6 +94,8 @@
   font-size: 1.1rem;
   color: #e95930;
   margin: 0 1rem 1px;
+  border-bottom: 1px dashed #e9583000;
+  transition: border-bottom 200ms ease-in-out;
 }
 .phone__number:hover {
   border-bottom: 1px dashed #e95930;

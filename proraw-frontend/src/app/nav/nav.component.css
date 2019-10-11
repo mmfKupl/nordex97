@@ -5,7 +5,7 @@
 .nav__catalog-a {
   display: flex;
   min-width: 5rem;
-  max-width: 260px;
+  max-width: 18.5rem;
   width: 100%;
   background-color: #0e2b57;
   color: white;
@@ -13,8 +13,8 @@
   align-items: center;
   font-size: 1.5rem;
   padding: 1rem 0.2rem;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
 }
 
 .nav__catalog-icon {

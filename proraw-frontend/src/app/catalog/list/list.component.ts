@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog-list',
