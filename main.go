@@ -152,7 +152,8 @@ func parseItemPage(url string, wg *sync.WaitGroup) {
 	description := page.Find(".v-product-description__header__content").Text()
 	article := strings.Replace(page.Find(".v-product-selections__sku .hint").First().Text(), "Артикул: ", "", -1)
 	property := strings.Join(page.Find(".v-product-features__zag + .v-product-features__table .v-product-features__tr").Map(func(i int, s *goquery.Selection) string {
-		text := s.Text()
+		text := ""
+		text += s.Find(".v-product-features__left").Text() + "|" + s.Find(".v-product-features__right").Text()
 		return text
 		// return re.ReplaceAllString(text, "")
 	}), "\n")

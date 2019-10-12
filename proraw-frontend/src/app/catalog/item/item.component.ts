@@ -12,6 +12,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   curentItemListId: number;
   curentItemId: number;
   curentItem: ItemList;
+  itemProperty: string[][];
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -19,7 +20,10 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.curentItemId = +this.route.snapshot.url[1].path;
     this.cd
       .getCurItem(this.curentItemListId, this.curentItemId)
-      .subscribe(data => console.log(data));
+      .subscribe(data => {
+        this.curentItem = data;
+        this.itemProperty = data.property.split('\n').map(el => el.split('|'));
+      });
   }
 
   ngOnDestroy() {}

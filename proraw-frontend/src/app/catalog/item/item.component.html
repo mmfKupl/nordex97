@@ -1,1 +1,15 @@
-<p>item works!</p>
+<div class="item" *ngIf="curentItem">
+  <h1 class="item__h3">{{ curentItem.title }}</h1>
+  <p class="item__desription">{{ curentItem.description }}</p>
+  <table class="item__table">
+    <thead class="item__table-thead">
+      <th class="item__table-th" colspan="2">Характеристики</th>
+    </thead>
+    <tbody class="item__table-tbody">
+      <tr class="item__table-tr" *ngFor="let prop of itemProperty">
+        <td class="item__table-td">{{ prop[0] }}</td>
+        <td class="item__table-td">{{ prop[1] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
