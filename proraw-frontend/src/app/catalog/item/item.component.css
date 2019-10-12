@@ -1,0 +1,57 @@
+:host{
+    width: 100%;
+}
+
+.item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+
+.item__h3{
+    color: #000;
+    font-size: 30px;
+    margin-bottom: 0.5rem;
+}
+
+.item__info{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
+}
+
+.item__info-available{
+    color: #00ad5d;
+    margin-right: 1rem;
+}
+
+.item__info-article{
+    color: #b0b0b0;
+}
+
+.item__description{
+    margin-bottom: 2rem;
+}
+
+.item__characters{
+    width: 100%;
+    border-bottom: 3px solid #054f86;
+    margin-bottom: 1rem;
+}
+
+.item__characters-inscription{
+    padding: 0.5rem 1rem;
+    background-color: #054f86;
+    color: white;
+    font-size: 18px;
+    width: 18rem;
+    clip-path: polygon(0 0, 70% 0, 100% 100%, 0 100%);
+}
+
+.item__table{
+    display: table;
+    font-size: 14px;
+    border-spacing: 1.5rem;
+}
+
