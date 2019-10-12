@@ -13,7 +13,12 @@ export class ListComponent implements OnInit {
   constructor(private cd: CatalogDataService) {}
 
   ngOnInit() {
-    this.itemList = this.cd.itemList;
+    const tempIL = this.cd.itemList;
+    if (Array.isArray(tempIL)) {
+      this.itemList = tempIL;
+    } else {
+      tempIL.subscribe((data: any[]) => (this.itemList = data));
+    }
   }
 
   setCurExpand(i: number) {
@@ -24,7 +29,7 @@ export class ListComponent implements OnInit {
     }
   }
 
-  getCurClass(expanId: number, e: Event) {
+  getCurClass(expanId: number) {
     if (!expanId) {
       return false;
     }
