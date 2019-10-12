@@ -12,7 +12,7 @@ import { ItemList } from '../item-list';
 export class ItemListComponent implements OnInit, OnDestroy {
   curItemListIdSubscription: Subscription;
   curItemListId: number;
-  curItemList$: Observable<ItemList[]>;
+  curItemList$: Observable<ItemList[] | object>;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
