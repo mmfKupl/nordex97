@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { ItemList } from '../item-list';
 
 @Component({
   selector: 'app-item-list',
@@ -11,7 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 export class ItemListComponent implements OnInit, OnDestroy {
   curItemListIdSubscription: Subscription;
   curItemListId: number;
-  curItemList$: Observable<any>;
+  curItemList$: Observable<ItemList[]>;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {

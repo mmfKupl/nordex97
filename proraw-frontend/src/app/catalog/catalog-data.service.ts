@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ItemList } from './item-list';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,10 @@ export class CatalogDataService {
     return this.itemList$;
   }
 
-  getCurItem(pos: number) {
-    return (this.itemListData && this.itemListData[pos]) || {};
-  }
-
-  getCurItemList(num: number) {
+  getCurItemList(num: number): Observable<ItemList[]> {
     const path = `../../assets/items/${num}.json`;
-    return this.httpClient.get(path).pipe(catchError(err => of([])));
+    return this.httpClient
+      .get(path)
+      .pipe(catchError(() => of([] as ItemList[]))) as Observable<ItemList[]>;
   }
 }
