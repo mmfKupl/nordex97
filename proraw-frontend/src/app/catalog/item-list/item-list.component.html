@@ -1,2 +1,11 @@
-<p>item-list works!</p>
-<p *ngFor="let item of curItemList$ | async">{{ item.title }}</p>
+<div class="item" *ngFor="let item of curItemList$ | async; let i = index">
+    <a class="item__wrapper"
+       [routerLink]="i"
+       >
+        <h4 class="item__header">{{item.title}}</h4>
+        <div class="item__info">
+            <p class="info-available">{{item.available}}</p>
+            <p class="info-article">Артикул - {{item.article}}</p>
+        </div>      
+    </a>
+</div>
