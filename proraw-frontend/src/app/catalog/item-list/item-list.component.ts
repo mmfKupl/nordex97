@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { ItemList } from '../item-list';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Item } from '../item';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-list',
@@ -10,21 +11,17 @@ import { ItemList } from '../item-list';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit, OnDestroy {
-  curItemListIdSubscription: Subscription;
   curItemListId: number;
-  curItemList$: Observable<ItemList[] | object>;
+  currentItems$: Observable<Item[] | object>;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.curItemListIdSubscription = this.route.paramMap.subscribe(
-      (data: ParamMap) => {
-        this.curItemListId = +data.get('id');
-        this.curItemList$ = this.cd.getCurItemList(this.curItemListId);
-      }
+    this.currentItems$ = this.route.paramMap.pipe(
+      map(data => +data.get('id')),
+      tap(id => (this.curItemListId = id)),
+      switchMap(id => this.cd.getItemsByCategoryId(id))
     );
   }
 
-  ngOnDestroy() {
-    this.curItemListIdSubscription.unsubscribe();
-  }
+  ngOnDestroy() {}
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ItemList } from '../item-list';
+import { Item } from '../item';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-catalog-item',
@@ -9,22 +10,28 @@ import { ItemList } from '../item-list';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit, OnDestroy {
-  curentItemListId: number;
+  currentCategoryId: number;
   curentItemId: number;
-  curentItem: ItemList;
+  curentItem: Item | any;
   itemProperty: string[][];
+
+  getItemSubscription: Subscription;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.curentItemListId = +this.route.snapshot.url[0].path;
+    this.currentCategoryId = +this.route.snapshot.url[0].path;
     this.curentItemId = +this.route.snapshot.url[1].path;
-    this.cd
-      .getCurItem(this.curentItemListId, this.curentItemId)
+    this.getItemSubscription = this.cd
+      .getItemByIdAndCategoryId(this.curentItemId, this.currentCategoryId)
       .subscribe(data => {
         this.curentItem = data;
-        this.itemProperty = data.property.split('\n').map(el => el.split('|'));
+        this.itemProperty = this.curentItem.Property.split('\n').map(el =>
+          el.split('|')
+        );
       });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.getItemSubscription.unsubscribe();
+  }
 }

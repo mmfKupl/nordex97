@@ -7,6 +7,7 @@ import { ItemComponent } from './item/item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { ItemCardComponent } from './item-card/item-card.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +15,10 @@ import { ItemListComponent } from './item-list/item-list.component';
     ItemComponent,
     CatalogComponent,
     BlockListComponent,
-    ItemListComponent
+    ItemListComponent,
+    ItemCardComponent
   ],
-  imports: [CommonModule, CatalogRoutingModule]
+  imports: [CommonModule, CatalogRoutingModule],
+  exports: [ItemCardComponent]
 })
 export class CatalogModule {}

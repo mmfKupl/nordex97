@@ -1,0 +1,11 @@
+<div class="item">
+  <a class="item__wrapper" [routerLink]="itemLink">
+    <h4 class="item__header">{{ itemTitle }}</h4>
+    <div class="item__info">
+      <p class="info-available">
+        {{ itemAvailable ? 'в наличии' : 'нет в наличии' }}
+      </p>
+      <p class="info-article">Артикул - {{ itemVendorCode }}</p>
+    </div>
+  </a>
+</div>

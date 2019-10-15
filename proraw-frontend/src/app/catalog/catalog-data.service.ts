@@ -1,55 +1,51 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { ItemList } from './item-list';
+import { Item } from './item';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Category } from '../category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogDataService {
-  itemList$: Observable<any>;
-  private itemListData: any;
-  private itemLists: { [key: string]: ItemList[] | object } = {};
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-    this.itemList$ = this.httpClient
-      .get('../../assets/itemList.json')
-      .pipe(data => {
-        this.itemListData = data;
-        return data;
-      });
+  get categories(): Observable<Category[]> {
+    return this.httpClient.get('api/categories').pipe(
+      tap(items => console.log('fetched items', items)),
+      catchError(err => [])
+    );
   }
 
-  get itemList(): any[] | Observable<any> {
-    if (this.itemListData) {
-      return this.itemListData;
-    }
-    return this.itemList$;
+  getItemsByCategoryId(num: number): Observable<Item[]> {
+    return this.httpClient.get(`api/items`).pipe(
+      map((items: any[]) => {
+        return items.filter(item => {
+          return item.IDCategory === num;
+        });
+      }),
+      catchError(err => [])
+    );
   }
 
-  getCurItemList(num: number): Observable<ItemList[] | object> {
-    if (this.itemLists[num]) {
-      return of(this.itemLists[num]);
-    }
-    const path = `../../assets/items/${num}.json`;
-    return this.httpClient.get(path).pipe(
-      catchError(() => of([] as ItemList[])),
-      map(value => {
-        this.itemLists[num] = value;
-        return value;
-      })
-    ) as Observable<ItemList[]>;
+  getItemByIdAndCategoryId(
+    itemId: number,
+    categoryId: number
+  ): Observable<Item> {
+    return this.getItemsByCategoryId(categoryId).pipe(
+      map(items => items.find(item => item.IDItem === itemId))
+    );
   }
 
-  getCurItem(listNum: number, num: number): Observable<ItemList> {
-    if (this.itemLists[listNum]) {
-      return of(this.itemLists[listNum][num]);
-    }
-    return this.getCurItemList(listNum).pipe(
-      map(value => {
-        return (value[num] || {}) as ItemList;
-      })
+  getSearchedData(str: string): Observable<Item[]> {
+    return this.httpClient.get('api/items').pipe(
+      map((items: any[]) => {
+        return items.filter(item => {
+          return item.VendorCode.toString().includes(str);
+        });
+      }),
+      catchError(err => [])
     );
   }
 }

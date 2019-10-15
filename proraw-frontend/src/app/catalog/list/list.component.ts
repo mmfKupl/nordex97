@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from 'src/app/category';
 
 @Component({
   selector: 'app-catalog-list',
@@ -8,16 +9,16 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  itemList: any[];
+  categories: Category[];
   curExpandId: {} = {};
   constructor(private cd: CatalogDataService) {}
 
   ngOnInit() {
-    const tempIL = this.cd.itemList;
+    const tempIL = this.cd.categories;
     if (Array.isArray(tempIL)) {
-      this.itemList = tempIL;
+      this.categories = tempIL;
     } else {
-      tempIL.subscribe((data: any[]) => (this.itemList = data));
+      tempIL.subscribe((data: any[]) => (this.categories = data));
     }
   }
 
