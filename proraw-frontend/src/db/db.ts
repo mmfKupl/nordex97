@@ -58,8 +58,8 @@ router.get('/api/items/:categoryId', (req, res, next) => {
   });
 });
 
-router.get('/api/search', (req, res, next) => {
-  sqlCon.getSearchData(req.query.query).then(data => {
+router.get('/api/search/:query', (req, res, next) => {
+  sqlCon.getSearchData(req.params.query).then(data => {
     const recordset = (data && data.recordset) || [];
     res.json(recordset);
   });
