@@ -12,7 +12,7 @@ export class CatalogDataService {
   constructor(private httpClient: HttpClient) {}
 
   getСategories(): Observable<Category[]> {
-    return this.httpClient.get('api/categories').pipe(
+    return this.httpClient.get('http://localhost:4000/api/categories').pipe(
       catchError(err => {
         console.log(err.message);
         return [];
@@ -21,7 +21,7 @@ export class CatalogDataService {
   }
 
   getItemsByCategoryId(num: number): Observable<Item[]> {
-    return this.httpClient.get(`api/items/${num}`).pipe(
+    return this.httpClient.get(`http://localhost:4000/api/items/${num}`).pipe(
       catchError(err => {
         console.log(err.message);
         return [];
@@ -47,7 +47,7 @@ export class CatalogDataService {
   }
 
   getSearchedData(str: string): Observable<Item[]> {
-    return this.httpClient.get(`api/search/${str}`).pipe(
+    return this.httpClient.get(`http://localhost:4000/api/search/${str}`).pipe(
       catchError(err => {
         console.log(err.message);
         return [];
