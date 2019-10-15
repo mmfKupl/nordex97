@@ -5,16 +5,11 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { SearchComponent } from './search/search.component';
-import { CategoryResolver } from './catefory.resolver';
-import { ItemsResolver } from './items.resolver';
 
 const routes: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent,
-    resolve: {
-      categories: CategoryResolver
-    },
     children: [
       {
         path: 'search',
@@ -22,10 +17,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: ItemListComponent,
-        resolve: {
-          items: ItemsResolver
-        }
+        component: ItemListComponent
       },
       {
         path: ':id/:id',

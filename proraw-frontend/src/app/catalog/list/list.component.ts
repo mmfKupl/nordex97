@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const tempIL = this.route.snapshot.data.categories;
+    const tempIL = this.cd.getСategories();
     console.log(tempIL);
     if (Array.isArray(tempIL)) {
       this.categories = tempIL;
