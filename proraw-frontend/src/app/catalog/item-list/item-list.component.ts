@@ -1,27 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Item } from '../item';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css']
 })
-export class ItemListComponent implements OnInit, OnDestroy {
+export class ItemListComponent implements OnInit {
   curItemListId: number;
-  currentItems$: Observable<Item[] | object>;
+  currentItems$: Observable<Item[]>;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.currentItems$ = this.route.paramMap.pipe(
       map(data => +data.get('id')),
       tap(id => (this.curItemListId = id)),
+      distinctUntilChanged(),
       switchMap(id => this.cd.getItemsByCategoryId(id))
     );
   }
-
-  ngOnDestroy() {}
 }

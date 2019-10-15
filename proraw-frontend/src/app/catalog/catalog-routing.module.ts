@@ -4,12 +4,17 @@ import { ItemComponent } from './item/item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
     path: 'catalog',
     component: CatalogComponent,
     children: [
+      {
+        path: 'search',
+        component: SearchComponent
+      },
       {
         path: ':id',
         component: ItemListComponent

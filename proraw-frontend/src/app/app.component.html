@@ -8,11 +8,15 @@
           class="input search__input"
           type="text"
           [placeholder]="searchPlaceholder"
+          (keydown.enter)="onEnter()"
         />
         <input
           class="input search__button"
           type="button"
-          aria-label="search button"
+          aria-label="search
+        button"
+          routerLink="catalog/search"
+          [queryParams]="{ query: searchStr }"
         />
       </div>
       <div class="main-phone">

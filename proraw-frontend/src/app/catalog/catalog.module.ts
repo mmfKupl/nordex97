@@ -8,6 +8,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { BlockListComponent } from './block-list/block-list.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ItemCardComponent } from './item-card/item-card.component';
     CatalogComponent,
     BlockListComponent,
     ItemListComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    SearchComponent
   ],
   imports: [CommonModule, CatalogRoutingModule],
   exports: [ItemCardComponent]

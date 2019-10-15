@@ -13,8 +13,11 @@ import {
   filter,
   debounceTime,
   distinctUntilChanged,
-  switchMap
+  switchMap,
+  tap,
+  mergeMap
 } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +28,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
   searchPlaceholder = 'Поиск по каталогу';
   searchSubscription: Subscription;
+  searchStr: string;
 
-  constructor(private cd: CatalogDataService) {}
+  constructor(
+    private cd: CatalogDataService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {}
 
@@ -40,12 +48,19 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       'input'
     )
       .pipe(
-        debounceTime(700),
         map(event => event.target.value.trim()),
         filter(value => !!value && value.length > 1),
+        tap(str => (this.searchStr = str)),
         distinctUntilChanged(),
+        debounceTime(500),
         switchMap((str: string) => this.cd.getSearchedData(str))
       )
       .subscribe(data => console.log(data));
+  }
+
+  onEnter() {
+    this.router.navigate(['catalog/search'], {
+      queryParams: { query: this.searchStr }
+    });
   }
 }

@@ -39,6 +39,7 @@ export class CatalogDataService {
   }
 
   getSearchedData(str: string): Observable<Item[]> {
+    console.log('get', str);
     return this.httpClient.get('api/items').pipe(
       map((items: any[]) => {
         return items.filter(item => {

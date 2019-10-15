@@ -1,0 +1,7 @@
+<app-item-card
+  *ngFor="let item of items$ | async; let i = index"
+  [itemTitle]="item.Title"
+  [itemAvailable]="item.Available"
+  [itemVendorCode]="item.VendorCode"
+  [itemLink]="item.IDItem"
+></app-item-card>
