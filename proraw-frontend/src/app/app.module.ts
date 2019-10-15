@@ -15,10 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CatalogModule,
     AppRoutingModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
-    })
+    HttpClientModule
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+    //   dataEncapsulation: false
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,6 +16,7 @@
  */
 
 import 'zone.js/dist/zone-node';
+import 'reflect-metadata';
 
 import * as express from 'express';
 import { join } from 'path';
@@ -61,8 +62,10 @@ app.get('/api', (req, res, next) => {
   res.send('api');
 });
 app.use(dbrouter);
+
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
+  console.log('reder');
   res.render('index', { req });
 });
 

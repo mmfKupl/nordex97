@@ -34,7 +34,7 @@
   height: 12rem;
   min-width: 5rem;
   width: 100%;
-  background: url(../assets/imgs/logo.png) no-repeat;
+  /* background: url(../assets/imgs/logo.png) no-repeat; */
   background-size: 100%;
   background-position: center center;
   max-width: 260px;
@@ -60,7 +60,7 @@
 }
 
 .search__button {
-  background-image: url(../assets/icons/search-solid.svg);
+  /* background-image: url(../assets/icons/search-solid.svg); */
   width: 2rem;
   height: 100%;
   background-size: 70%;
@@ -84,7 +84,7 @@
   width: 3.7rem;
   border-radius: 50%;
   background-color: #f4f4f4;
-  background-image: url(../assets/icons/phone-alt-solid.svg);
+  /* background-image: url(../assets/icons/phone-alt-solid.svg); */
   background-repeat: no-repeat;
   background-size: 40%;
   background-position: center center;

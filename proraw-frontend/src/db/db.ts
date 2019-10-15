@@ -43,7 +43,7 @@ router.get('/api/items', (req, res, next) => {
   });
 });
 
-router.get('/api/category', (req, res, next) => {
+router.get('/api/categories', (req, res, next) => {
   sqlCon.getCategory().then(data => {
     const recordset = (data && data.recordset) || [];
     res.json(recordset);
@@ -54,6 +54,7 @@ router.get('/api/items/:categoryId', (req, res, next) => {
   const categoryId = +req.params.categoryId;
   sqlCon.getItemsByCategoryId(categoryId).then(data => {
     const recordset = (data && data.recordset) || [];
+    console.log('items from db');
     res.json(recordset);
   });
 });
