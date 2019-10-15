@@ -12,21 +12,25 @@ export const sqlCon = {
     if (!this.sqlCon) {
       return null;
     }
-    return await this.sqlCon.query('select * from Category');
+    return await this.sqlCon.query('exec GetCategoryTable');
   },
   async getItems() {
     if (!this.sqlCon) {
       return null;
     }
-    return await this.sqlCon.query('select * from Item');
+    return await this.sqlCon.query('exec GetItemTable');
   },
   async getItemsByCategoryId(categoryId: number) {
     if (!this.sqlCon || categoryId < 0) {
       return null;
     }
-    return await this.sqlCon.query(
-      `select * from Item where IDCategory = ${categoryId}`
-    );
+    return await this.sqlCon.query(`exec GetItemByCategoryId ${categoryId}`);
+  },
+  async getSearchData(query: string) {
+    if (!this.sqlCon || !query) {
+      return null;
+    }
+    return await this.sqlCon.query(`exec GetSearchData '${query}'`);
   }
 };
 
@@ -54,6 +58,11 @@ router.get('/api/items/:categoryId', (req, res, next) => {
   });
 });
 
-export const dbrouter = router;
+router.get('/api/search', (req, res, next) => {
+  sqlCon.getSearchData(req.query.query).then(data => {
+    const recordset = (data && data.recordset) || [];
+    res.json(recordset);
+  });
+});
 
-// const
+export const dbrouter = router;

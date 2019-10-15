@@ -26,6 +26,24 @@ create table Item (
 select * from Item
 select * from Category
 
+go
+create proc GetItemByCategoryId
+@IDCategory int
+as
+select * from Item where IDCategory = @IDCategory
+
+go
+create proc GetSearchData
+@SearchStr varchar(40)
+as
+set @SearchStr = '%' + @SearchStr + '%'
+select * from Item where Title like @SearchStr or VendorCode like @SearchStr
+
+go
+create proc GetItemTable
+as
+select * from Item
+
 go 
 create proc GetCategoryTable
 as
