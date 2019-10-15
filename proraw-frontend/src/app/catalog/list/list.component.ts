@@ -11,10 +11,11 @@ import { Category } from 'src/app/category';
 export class ListComponent implements OnInit {
   categories: Category[];
   curExpandId: {} = {};
-  constructor(private cd: CatalogDataService) {}
+  constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const tempIL = this.cd.categories;
+    const tempIL = this.route.snapshot.data.categories;
+    console.log(tempIL);
     if (Array.isArray(tempIL)) {
       this.categories = tempIL;
     } else {

@@ -11,16 +11,21 @@ import { map, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
-  curItemListId: number;
   currentItems$: Observable<Item[]>;
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentItems$ = this.route.paramMap.pipe(
-      map(data => +data.get('id')),
-      tap(id => (this.curItemListId = id)),
-      distinctUntilChanged(),
-      switchMap(id => this.cd.getItemsByCategoryId(id))
+    console.log('ngOnInitItems');
+    this.currentItems$ = this.route.data.pipe(
+      map(data => {
+        console.log(data.items);
+        return data.items;
+      })
+      // switchMap(id => this.cd.getItemsByCategoryId(id))
     );
+    // this.currentItems$ = this.route.paramMap.pipe(
+    //   map(data => +data.get('id')),
+    //   switchMap(id => this.cd.getItemsByCategoryId(id))
+    // );
   }
 }
