@@ -13,15 +13,7 @@
   align-items: center;
   font-size: 1.5rem;
   padding: 1rem 0.2rem;
+  border-bottom: 2px dotted #fff;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
-}
-
-.nav__catalog-icon {
-  display: inline-block;
-  margin-right: 1rem;
-  /* background-image: url(../../assets/icons/bars-solid.svg); */
-  background-repeat: no-repeat;
-  width: 1.5rem;
-  height: 1.5rem;
 }

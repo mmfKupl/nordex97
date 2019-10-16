@@ -13,11 +13,9 @@
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
       (click)="category.ExpandId ? setCurExpand(i) : null"
     >
-      <span class="a__span" [class.dnone]="category.Sub">
-        <span class="a__span-circle"></span>
-        <span class="a__span-line"></span> </span
-      ><span>{{ category.Title }}</span>
-      <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
+    <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
+      <span class="a__span" [class.dnone]="category.Sub"> </span>
+      <span>{{ category.Title }}</span>
     </a>
   </li>
 </ul>
