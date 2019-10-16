@@ -1,15 +1,16 @@
 .main__ul {
   min-width: 18.5rem;
   max-width: 18.5rem;
-  color: rgb(219, 219, 219);
+  color: black;
   border-bottom-left-radius: 0.6rem;
   border-bottom-right-radius: 0.6rem;
-  padding-bottom: 1rem;
-  background-color: #0e2b57;
+  padding: 1rem 0;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
 .main__li {
-  background-color: #0e2b57;
+  background-color: #fff;
   z-index: 20;
 }
 
@@ -40,11 +41,10 @@
 }
 
 .button__span {
-  position: absolute;
+  margin-left: auto;
   cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #508cb9;
   border-radius: 0.3rem;
   outline: none;
   background-image: url("../../../assets/icons/add-plus-button.svg");
@@ -75,6 +75,14 @@
   border-right: 1px solid #d8d4d4;
 }
 
+.sub-open{
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.sub-open{
+  box-shadow: inset 0px -4px 4px rgba(0, 0, 0, 0.2);
+}
+
 .a__span {
   display: block;
   height: 1rem;
@@ -84,41 +92,25 @@
   opacity: 0.3;
 }
 
-.main__a:not(.sub).active,
 .main__a:not(.sub):hover {
-  color: #fefeff;
-  background-color: #0d274e;
-}
-
-.main__a:not(.sub).active{
-  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 1);
+  color: black;
+  background-color: #F4F4F4;
 }
 
 .main__a.sub:hover {
-  background-color: #f7f7f7;
-  color: #e95930;
+  background-color: #F4F4F4;
 }
 
 .main__a.sub.active {
-  background-color: #ececec;
-  color: #e95930;
-  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 1);
+  background-color: #e4e4e4;
 }
 
 .main__a.active .a__span {
   opacity: 1;
 }
 
-.main__li:not(.sub)::after{
-  content: '';
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #fff;
-  transform: scale(0);
-  transition: all .3s;
-}
-
-.main__li:hover::after{
-  transform: scale(1);
+.main__a:not(.sub).active{
+  background-color: #e4e4e4;
+  color: black;
+  font-weight: bold;
 }

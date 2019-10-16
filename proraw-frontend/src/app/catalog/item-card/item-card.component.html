@@ -1,11 +1,11 @@
 <div class="item">
   <a class="item__wrapper" (click)="routeTo()">
-    <h4 class="item__header">{{ itemTitle }}</h4>
     <div class="item__info">
-      <p class="info-available">
-        {{ itemAvailable ? 'в наличии' : 'нет в наличии' }}
-      </p>
-      <p class="info-article">Артикул - {{ itemVendorCode }}</p>
+      <p class="info-article"><span class="article">Артикул - </span>{{ itemVendorCode }}</p>
+        <p class="info-available">
+          {{ itemAvailable ? 'в наличии' : 'нет в наличии' }}
+        </p>
     </div>
+    <h4 class="item__header">{{ itemTitle }}</h4>
   </a>
 </div>
