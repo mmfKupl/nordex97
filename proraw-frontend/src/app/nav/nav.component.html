@@ -3,4 +3,9 @@
     <span class="nav__catalog-icon"></span>
     Каталог товаров
   </a>
+  <a
+    *ngFor="let broadCrumb of broadCrumbs$ | async"
+    [routerLink]="[broadCrumb.link]"
+    >{{ broadCrumb.title }} ->
+  </a>
 </nav>
