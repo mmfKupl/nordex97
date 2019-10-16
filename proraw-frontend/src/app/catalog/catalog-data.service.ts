@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Item } from './item';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap, filter } from 'rxjs/operators';
 import { Category } from '../category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogDataService {
+  private categories: Category[];
+  private items: { [key: string]: Item[] } = {};
+
   constructor(private httpClient: HttpClient) {}
 
   getСategories(): Observable<Category[]> {
@@ -18,21 +21,58 @@ export class CatalogDataService {
     //     return [];
     //   })
     // );
-    return this.httpClient.get<Category[]>('api/categories');
+    if (Array.isArray(this.categories)) {
+      return of(this.categories);
+    }
+    return this.httpClient.get<Category[]>('api/categories').pipe(
+      tap(data => {
+        this.categories = data;
+      })
+    );
   }
 
-  getItemsByCategoryId(num: number): Observable<Item[]> {
+  getCurrentCategoryTitle(categoryId: number): string {
+    return this.categories
+      ? this.categories.find(c => c.IDCategory === categoryId).Title
+      : '';
+  }
+
+  getCurrentItemTitle(categoryId: number, itemId: number): string {
+    if (!Array.isArray(this.categories) || !this.items) {
+      return '';
+    }
+    const itemsByCategory = this.items[categoryId];
+    if (!(itemsByCategory && itemsByCategory.length)) {
+      return '';
+    }
+
+    const curItem = itemsByCategory.find(item => item.IDItem === itemId);
+
+    if (!curItem) {
+      return '';
+    }
+
+    return curItem.Title;
+  }
+
+  getItemsByCategoryId(categoryId: number): Observable<Item[]> {
     // return this.httpClient.get(`http://localhost:4000/api/items/${num}`).pipe(
     //   catchError(err => {
     //     console.log(err.message);
     //     return [];
     //   })
     // );
+    if (this.items && this.items[categoryId] && this.items[categoryId].length) {
+      return of(this.items[categoryId]);
+    }
     return this.httpClient.get<Item[]>(`api/items`).pipe(
       map(items => {
         return items.filter(item => {
-          return item.IDCategory === num;
+          return item.IDCategory === categoryId;
         });
+      }),
+      tap(items => {
+        this.items[categoryId] = items;
       }),
       catchError(err => [])
     );

@@ -18,9 +18,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.items$ = this.route.queryParamMap.pipe(
       map(data => data.get('query')),
-      tap(d => console.log(d)),
-      switchMap(query => this.cd.getSearchedData(query)),
-      tap(d => console.log(d))
+      switchMap(query => this.cd.getSearchedData(query))
     );
   }
 }

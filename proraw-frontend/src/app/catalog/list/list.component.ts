@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/category';
 
 @Component({
@@ -11,11 +10,10 @@ import { Category } from 'src/app/category';
 export class ListComponent implements OnInit {
   categories: Category[];
   curExpandId: {} = {};
-  constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
+  constructor(private cd: CatalogDataService) {}
 
   ngOnInit() {
     const tempIL = this.cd.getСategories();
-    console.log(tempIL);
     if (Array.isArray(tempIL)) {
       this.categories = tempIL;
     } else {

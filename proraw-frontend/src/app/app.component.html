@@ -15,8 +15,7 @@
           type="button"
           aria-label="search
         button"
-          routerLink="catalog/search"
-          [queryParams]="{ query: searchStr }"
+          (click)="onEnter()"
         />
       </div>
       <div class="main-phone">

@@ -6,18 +6,9 @@ import {
   ElementRef,
   OnDestroy
 } from '@angular/core';
-import { CatalogDataService } from './catalog/catalog-data.service';
 import { fromEvent, Subscription } from 'rxjs';
-import {
-  map,
-  filter,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  tap,
-  mergeMap
-} from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -28,18 +19,25 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
   searchPlaceholder = 'Поиск по каталогу';
   searchSubscription: Subscription;
+  routeSubscription: Subscription;
   searchStr: string;
 
-  constructor(
-    private cd: CatalogDataService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((e: any) => {
+        if (!e.url.includes('search') && !!this.searchInput) {
+          this.searchInput.nativeElement.value = null;
+          this.searchStr = '';
+        }
+      });
+  }
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -51,16 +49,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         map(event => event.target.value.trim()),
         filter(value => !!value && value.length > 1),
         tap(str => (this.searchStr = str)),
-        distinctUntilChanged(),
-        debounceTime(500),
-        switchMap((str: string) => this.cd.getSearchedData(str))
+        distinctUntilChanged()
       )
-      .subscribe(data => console.log(data));
+      .subscribe();
   }
 
   onEnter() {
-    this.router.navigate(['catalog/search'], {
-      queryParams: { query: this.searchStr }
-    });
+    if (this.searchStr) {
+      this.router.navigate(['catalog/search'], {
+        queryParams: { query: this.searchStr }
+      });
+    }
   }
 }

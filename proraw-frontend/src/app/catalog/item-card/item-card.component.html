@@ -1,5 +1,5 @@
 <div class="item">
-  <a class="item__wrapper" [routerLink]="itemLink">
+  <a class="item__wrapper" (click)="routeTo()">
     <h4 class="item__header">{{ itemTitle }}</h4>
     <div class="item__info">
       <p class="info-available">
