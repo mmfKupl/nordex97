@@ -58,6 +58,6 @@
     width: 50%;
 }
 
-.item__table-tr:nth-child(2n){
-    background-color: #C7C7C7;
+.item__table-tr{
+    border: 1px solid #EAEAEA;
 }
