@@ -29,8 +29,13 @@
 .header__main {
   height: auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
+}
+
+.main-name{
+  font-size: 2.7rem;
 }
 
 .main-search {
@@ -45,6 +50,7 @@
   width: 40%;
   justify-content: space-between;
   margin-left: auto;
+  margin-right: 3rem;
   transition: box-shadow 200ms, border 200ms;
 }
 
@@ -71,33 +77,30 @@
   cursor: pointer;
 }
 
-.main-phone {
+.main-requsites{
   display: flex;
   align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 6rem;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0);
   height: 3.7rem;
-  padding: 1rem 2rem;
-  justify-content: space-between;
-  align-self: center;
-}
-
-.phone__icon {
-  height: 3.7rem;
-  width: 3.7rem;
-  border-radius: 50%;
-  background-color: #f4f4f4;
-  background-image: url(../../static/icons/phone-alt-solid.svg);
-  background-repeat: no-repeat;
-  background-size: 40%;
-  background-position: center center;
-}
-
-.phone__number {
+  width: 10%;
+  font-weight: bold;
   font-size: 1.1rem;
-  color: #e95930;
-  margin: 0 1rem 1px;
-  border-bottom: 1px dashed #e9583000;
-  transition: border-bottom 200ms ease-in-out;
+  outline: none;
+  transition: box-shadow 200ms, border 200ms;
 }
-.phone__number:hover {
-  border-bottom: 1px dashed #e95930;
+
+.main-requsites:hover {
+  border: 1px solid rgba(0, 0, 0, 0);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.main-requsites:active{
+  background-color: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }

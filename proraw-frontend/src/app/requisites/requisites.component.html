@@ -1,1 +1,13 @@
-<p>requisites works!</p>
+<div class="item">
+    <div class="item__characters">
+        <p class="item__characters-text">Реквизиты</p>
+    </div>
+    <table class="item__table">
+        <tbody class="item__table-tbody">
+        <tr class="item__table-tr" *ngFor="let requisite of requisites">
+            <td class="item__table-td">{{ requisite.name }}</td>
+            <td class="item__table-td">{{ requisite.info }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
