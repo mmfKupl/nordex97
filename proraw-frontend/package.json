@@ -5,7 +5,14 @@
     "ng": "ng",
     "start": "node server.js",
     "postinstall": "ng build --aot=\"true\" --prod=\"true\"",
-    "server": "node server.js"
+    "server": "node server.js",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run proraw-frontend:server:production --bundleDependencies all"
   },
   "private": true,
   "dependencies": {
