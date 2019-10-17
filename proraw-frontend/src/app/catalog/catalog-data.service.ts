@@ -31,28 +31,10 @@ export class CatalogDataService {
     );
   }
 
-  getCurrentCategoryTitle(categoryId: number): string {
-    return this.categories
-      ? this.categories.find(c => c.IDCategory === categoryId).Title
-      : '';
-  }
-
-  getCurrentItemTitle(categoryId: number, itemId: number): string {
-    if (!Array.isArray(this.categories) || !this.items) {
-      return '';
-    }
-    const itemsByCategory = this.items[categoryId];
-    if (!(itemsByCategory && itemsByCategory.length)) {
-      return '';
-    }
-
-    const curItem = itemsByCategory.find(item => item.IDItem === itemId);
-
-    if (!curItem) {
-      return '';
-    }
-
-    return curItem.Title;
+  getCurrentCategory(categoryId: number): Observable<Category> {
+    return this.getСategories().pipe(
+      map(cats => cats.find(cat => cat.IDCategory === categoryId))
+    );
   }
 
   getItemsByCategoryId(categoryId: number): Observable<Item[]> {

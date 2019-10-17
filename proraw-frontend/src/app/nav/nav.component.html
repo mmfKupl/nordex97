@@ -3,4 +3,9 @@
     Каталог товаров
     <span class="nav_underline"></span>
   </a>
+  <a
+    *ngFor="let broadCrumb of broadCrumbs$ | async"
+    [routerLink]="[broadCrumb.link]"
+    >{{ broadCrumb.title }} ->
+  </a>
 </nav>

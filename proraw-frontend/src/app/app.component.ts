@@ -6,9 +6,20 @@ import {
   ElementRef,
   OnDestroy
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
+import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
+import {
+  map,
+  filter,
+  distinctUntilChanged,
+  tap,
+  mergeMap,
+  delayWhen,
+  concatAll,
+  combineAll
+} from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
+import { CatalogDataService } from './catalog/catalog-data.service';
+import { BroadCrumb } from './broad-crumb';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +32,18 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   searchSubscription: Subscription;
   routeSubscription: Subscription;
   searchStr: string;
+  currentBroadCrumbs$: Observable<BroadCrumb[]>;
+  dataFetched = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cd: CatalogDataService) {}
 
   ngOnInit() {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
+        this.currentBroadCrumbs$ = this.getBreadCrumbs(
+          e.url.split('/').filter(Boolean)
+        );
         if (!e.url.includes('search') && !!this.searchInput) {
           this.searchInput.nativeElement.value = null;
           this.searchStr = '';
@@ -38,6 +54,35 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
+  }
+
+  getBreadCrumbs(url: string[]): Observable<BroadCrumb[]> {
+    const [catalog, category, item] = url;
+    const maped = [];
+    if (catalog === 'catalog') {
+      maped.push(of({ title: 'каталог', link: 'catalog' }));
+    }
+    if (+category >= 0) {
+      const obs = this.cd.getCurrentCategory(+category).pipe(
+        map(v => ({
+          title: v.Title || 'не найден',
+          link: v.IDCategory ? `catalog/${v.IDCategory}` : 'catalog'
+        }))
+      );
+      maped.push(obs);
+    }
+    if (+item >= 0) {
+      const obs = this.cd.getItemByIdAndCategoryId(+item, +category).pipe(
+        map(v => ({
+          title: v.Title || 'не найден',
+          link: v.IDItem
+            ? `catalog/${v.IDCategory}/${v.IDItem}`
+            : `catalog/${+category}`
+        }))
+      );
+      maped.push(obs);
+    }
+    return combineLatest(maped) as Observable<BroadCrumb[]>;
   }
 
   ngAfterViewInit() {
