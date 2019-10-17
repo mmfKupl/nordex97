@@ -6,7 +6,6 @@
     "start": "node server.js",
     "postinstall": "ng build --aot=\"true\" --prod=\"true\"",
     "server": "node server.js",
-    "build": "npm run build:client-and-server-bundles && npm run compile:server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
