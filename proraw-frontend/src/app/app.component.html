@@ -1,6 +1,9 @@
 <header class="header">
   <div class="wrapper">
     <div class="header__main">
+      <h1 class="main-name">
+          ООО Нордекс 97
+      </h1>
       <div class="main-search">
         <input
           #searchInput
@@ -17,6 +20,10 @@
           (click)="onEnter()"
         />
       </div>
+      <a 
+        class="main-requsites"
+        routerLink="/requisites"
+        >Реквизиты</a>
     </div>
     <app-nav [broadCrumbs$]="currentBroadCrumbs$"></app-nav>
   </div>
