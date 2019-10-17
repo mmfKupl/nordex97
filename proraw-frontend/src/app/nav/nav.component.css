@@ -46,6 +46,7 @@
   text-align: center;
   padding-bottom: 1px;
   position: relative;
+  transform: translateY(5px);
 }
 
 .nav__bread-crumb:hover {
