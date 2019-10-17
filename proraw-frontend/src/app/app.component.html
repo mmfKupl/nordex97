@@ -1,7 +1,6 @@
 <header class="header">
   <div class="wrapper">
     <div class="header__main">
-      <a routerLink="" class="main__logo"></a>
       <div class="main-search">
         <input
           #searchInput
@@ -17,10 +16,6 @@
         button"
           (click)="onEnter()"
         />
-      </div>
-      <div class="main-phone">
-        <p class="phone__icon"></p>
-        <a class="phone__number" href="tel:88007750659">8 (800) 775-0659</a>
       </div>
     </div>
     <app-nav [broadCrumbs$]="currentBroadCrumbs$"></app-nav>

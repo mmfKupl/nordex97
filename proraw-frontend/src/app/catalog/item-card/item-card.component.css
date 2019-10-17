@@ -12,34 +12,42 @@
 .item__wrapper {
   width: 100%;
   min-height: 9rem;
-  border: 1px solid #d8d4d4;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.28);
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
-  transition: background-color 350ms, border-color 350ms;
+  transition:  box-shadow 350ms;
 }
 
 .item__info {
-  margin-top: auto;
+  margin-bottom: auto;
   display: flex;
 }
 
 .item__header {
-  padding-bottom: 1rem;
+  padding-top: 1rem;
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
 }
 
 .info-available {
-  color: #00ad5d;
-  margin-right: auto;
+  color: #0BC807;
+  margin-left: auto;
 }
 
 .info-article {
-  color: #b0b0b0;
+  color: black;
+}
+
+.article{
+  color: #464545;
 }
 
 .item__wrapper:hover {
-  background-color: #f7f7f7;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
 
