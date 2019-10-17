@@ -2,7 +2,7 @@
   <li class="main__li" *ngFor="let category of categories; let i = index">
     <a
       class="main__a"
-      [routerLink]="category.IDCategory"
+      [routerLink]="['catalog', category.IDCategory]"
       routerLinkActive="active"
       [class.sub]="category.Sub"
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
@@ -30,7 +30,7 @@
       >
         <a
           class="main__a"
-          [routerLink]="subCat.IDCategory"
+          [routerLink]="['catalog', subCat.IDCategory]"
           routerLinkActive="active"
           [class.sub]="subCat.Sub"
           >{{ subCat.Title }}</a

@@ -5,15 +5,34 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CatalogModule } from './catalog/catalog.module';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ItemComponent } from './item/item.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemCardComponent } from './item-card/item-card.component';
+import { BlockListComponent } from './block-list/block-list.component';
+import { ListComponent } from './list/list.component';
+import { SearchComponent } from './search/search.component';
+import { CatalogComponent } from './catalog/catalog.component';
+import { RequisitesComponent } from './requisites/requisites.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    CatalogComponent,
+    ItemComponent,
+    ItemListComponent,
+    ItemCardComponent,
+    BlockListComponent,
+    ListComponent,
+    SearchComponent,
+    RequisitesComponent
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    CatalogModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {

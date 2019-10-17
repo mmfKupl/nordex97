@@ -15,6 +15,10 @@
   margin: 0 auto;
   height: 100%;
 }
+.catalog {
+  display: flex;
+}
+
 .header > .wrapper {
   padding-bottom: 0;
 }

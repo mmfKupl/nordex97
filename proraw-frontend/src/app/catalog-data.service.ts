@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Item } from './item';
 import { catchError, map, tap, filter } from 'rxjs/operators';
-import { Category } from '../category';
+import { Category } from './category';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +73,7 @@ export class CatalogDataService {
     //     return [];
     //   })
     // );
+    console.log(categoryId);
     if (this.items && this.items[categoryId] && this.items[categoryId].length) {
       return of(this.items[categoryId]);
     }
@@ -83,6 +84,7 @@ export class CatalogDataService {
         });
       }),
       tap(items => {
+        console.log(items);
         this.items[categoryId] = items;
       }),
       catchError(err => [])

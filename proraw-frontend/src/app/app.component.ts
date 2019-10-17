@@ -9,7 +9,7 @@ import {
 import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
-import { CatalogDataService } from './catalog/catalog-data.service';
+import { CatalogDataService } from './catalog-data.service';
 import { BroadCrumb } from './broad-crumb';
 
 @Component({
@@ -52,6 +52,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     const maped = [];
     if (catalog === 'catalog') {
       maped.push(of({ title: 'Каталог', link: 'catalog' }));
+    }
+    if (catalog === 'requisites') {
+      maped.push(of({ title: 'Реквизиты', link: 'requisites' }));
     }
     if (+category >= 0) {
       const obs = this.cd.getCurrentCategory(+category).pipe(
