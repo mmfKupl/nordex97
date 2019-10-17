@@ -1,21 +1,41 @@
 <ul class="main__ul">
-  <li
-    class="main__li"
-    *ngFor="let category of categories; let i = index"
-    [class.sub]="category.Sub"
-    [class.sub-open]="getCurClass(category.Expand)"
-  >
+  <li class="main__li" *ngFor="let category of categories; let i = index">
     <a
       class="main__a"
       [routerLink]="category.IDCategory"
       routerLinkActive="active"
       [class.sub]="category.Sub"
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
-      (click)="category.ExpandId ? setCurExpand(i) : null"
+      (click)="category.ExpandId ? setCurExpand(category.ExpandId) : null"
     >
-    <span class="a__span" [class.dnone]="category.Sub"> </span>
-    <span>{{ category.Title }}</span>
-    <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
+      <span>{{ category.Title }}</span>
+      <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
     </a>
+    <ul
+      class="main__ul-expand"
+      [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
+      *ngIf="category.Subs && category.Subs.length > 0"
+      [ngStyle]="{
+        'height.px': getExpandStyle(
+          category.Subs.length,
+          curExpandId[category.ExpandId] === category.ExpandId
+        )
+      }"
+    >
+      <li
+        class="main__li"
+        *ngFor="let subCat of category.Subs"
+        [class.sub]="subCat.Sub"
+        [class.sub-open]="getCurClass(subCat.Expand)"
+      >
+        <a
+          class="main__a"
+          [routerLink]="subCat.IDCategory"
+          routerLinkActive="active"
+          [class.sub]="subCat.Sub"
+          >{{ subCat.Title }}</a
+        >
+      </li>
+    </ul>
   </li>
 </ul>

@@ -25,6 +25,22 @@ export class CatalogDataService {
       return of(this.categories);
     }
     return this.httpClient.get<Category[]>('api/categories').pipe(
+      map(data => {
+        const maped: Category[] = [];
+        for (const el of data) {
+          if (el.Expand) {
+            const eidel = maped.find(mel => mel.ExpandId === el.Expand);
+            if (Array.isArray(eidel.Subs)) {
+              eidel.Subs.push(el);
+            } else {
+              eidel.Subs = [el];
+            }
+          } else {
+            maped.push(el);
+          }
+        }
+        return maped;
+      }),
       tap(data => {
         this.categories = data;
       })
@@ -33,8 +49,21 @@ export class CatalogDataService {
 
   getCurrentCategory(categoryId: number): Observable<Category> {
     return this.getСategories().pipe(
+      map(cats => this.flatCategories(cats)),
       map(cats => cats.find(cat => cat.IDCategory === categoryId))
     );
+  }
+
+  private flatCategories(array: Category[]): Category[] {
+    return array.reduce((ac, cur) => {
+      if (!cur.Subs) {
+        ac.push(cur);
+      } else {
+        const subs = cur.Subs;
+        ac.push(cur, ...subs);
+      }
+      return ac;
+    }, []);
   }
 
   getItemsByCategoryId(categoryId: number): Observable<Item[]> {

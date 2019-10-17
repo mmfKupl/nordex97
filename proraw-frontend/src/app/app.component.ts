@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     const [catalog, category, item] = url;
     const maped = [];
     if (catalog === 'catalog') {
-      maped.push(of({ title: 'каталог', link: 'catalog' }));
+      maped.push(of({ title: 'Каталог', link: 'catalog' }));
     }
     if (+category >= 0) {
       const obs = this.cd.getCurrentCategory(+category).pipe(

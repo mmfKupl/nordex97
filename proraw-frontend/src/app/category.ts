@@ -4,4 +4,5 @@ export class Category {
   ExpandId: null | number;
   Sub: boolean;
   Title: string;
+  Subs?: Category[];
 }

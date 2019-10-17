@@ -34,3 +34,7 @@ ol {
 .dnone {
   display: none !important;
 }
+
+strong {
+  font-weight: bold;
+}

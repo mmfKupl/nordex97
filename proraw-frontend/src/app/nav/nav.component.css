@@ -5,7 +5,7 @@
 .nav__catalog-a {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
   min-width: 5rem;
   max-width: 18.5rem;
   width: 100%;
@@ -16,16 +16,58 @@
   font-size: 1.5rem;
   font-weight: bold;
   padding: 1rem 0.2rem;
-  border-top-left-radius: 0.6rem;
-  border-top-right-radius: 0.6rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  position: relative;
+  margin-right: 2rem;
 }
 
-.nav_underline{
+.nav_underline {
   content: '';
+  position: absolute;
   margin-top: auto;
   display: block;
-  width: 100%;
-  height: 2px;
+  width: 80%;
+  height: 1px;
   background-color: #cacaca;
-  transform: scale(0.8);
+  bottom: 0;
+}
+
+.nav_underline-extra {
+  width: 100%;
+  height: 1rem;
+  background-color: white;
+  transform: translateY(50%);
+}
+
+.nav__bread-crumb {
+  align-self: center;
+  font-size: 1.2rem;
+  text-align: center;
+  padding-bottom: 1px;
+  position: relative;
+}
+
+.nav__bread-crumb:hover {
+  border-bottom: 1px solid #000000;
+}
+
+.nav__bread-crumb:not(:last-child) {
+  margin-right: 2rem;
+  color: #4e4e4e;
+  opacity: 0.6;
+}
+
+.nav__bread-crumb:not(:last-child)::after {
+  text-align: center;
+  content: '';
+  position: absolute;
+  display: inline-block;
+  background-image: url(../../assets/icons/caret-right-solid.svg);
+  width: 1rem;
+  height: 1rem;
+  background-size: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: translate(50%, 10%);
 }

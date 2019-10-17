@@ -1,11 +1,13 @@
 <nav class="header__nav">
   <a routerLink="/catalog" class="nav__catalog-a">
     Каталог товаров
+    <span class="nav_underline nav_underline-extra"></span>
     <span class="nav_underline"></span>
   </a>
   <a
+    class="nav__bread-crumb"
     *ngFor="let broadCrumb of broadCrumbs$ | async"
     [routerLink]="[broadCrumb.link]"
-    >{{ broadCrumb.title }} ->
+    >{{ broadCrumb.title }}
   </a>
 </nav>

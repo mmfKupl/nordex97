@@ -35,4 +35,8 @@ export class ListComponent implements OnInit {
     }
     return this.curExpandId && expanId === this.curExpandId[expanId];
   }
+
+  getExpandStyle(amountOfItems: number = 0, expand = false) {
+    return expand ? amountOfItems * 14 * 3 : 0;
+  }
 }
