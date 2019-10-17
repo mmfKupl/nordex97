@@ -7,16 +7,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
-import {
-  map,
-  filter,
-  distinctUntilChanged,
-  tap,
-  mergeMap,
-  delayWhen,
-  concatAll,
-  combineAll
-} from 'rxjs/operators';
+import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { CatalogDataService } from './catalog/catalog-data.service';
 import { BroadCrumb } from './broad-crumb';
