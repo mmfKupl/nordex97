@@ -8,7 +8,7 @@ class Requisite {
 @Component({
   selector: 'app-requisites',
   templateUrl: './requisites.component.html',
-  styleUrls: ['./requisites.component.css']
+  styleUrls: ['./requisites.component.scss']
 })
 export class RequisitesComponent implements OnInit {
   constructor() {}
