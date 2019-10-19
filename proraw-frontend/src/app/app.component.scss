@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 .header,
 .main,
 .footer {
@@ -6,6 +8,8 @@
 
 .header {
   min-height: 10rem;
+  background-color: $header-bg;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.25);
 }
 
 .wrapper {
@@ -37,6 +41,19 @@
 .main-name {
   font-weight: 600;
   font-size: 2.7rem;
+  position: relative;
+  color: $list-ul-open-bg;
+}
+
+.main-name::after {
+  content: '';
+  display: block;
+  width: 100%;
+  position: absolute;
+  height: 0.3rem;
+  background-color: $list-ul-open-bg;
+  transform: translateX(10%) skewX(-40deg);
+  bottom: -0.5rem;
 }
 
 .main-search {
