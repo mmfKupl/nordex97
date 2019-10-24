@@ -10,7 +10,7 @@ import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { CatalogDataService } from './catalog-data.service';
-import { BroadCrumb } from './broad-crumb';
+import { Link } from './broad-crumb';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   searchSubscription: Subscription;
   routeSubscription: Subscription;
   searchStr: string;
-  currentBroadCrumbs$: Observable<BroadCrumb[]>;
+  currentBroadCrumbs$: Observable<Link[]>;
   dataFetched = false;
 
   constructor(private router: Router, private cd: CatalogDataService) {}
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.routeSubscription.unsubscribe();
   }
 
-  getBreadCrumbs(url: string[]): Observable<BroadCrumb[]> {
+  getBreadCrumbs(url: string[]): Observable<Link[]> {
     const [catalog, category, item] = url;
     const maped = [];
     if (catalog === 'catalog') {
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       );
       maped.push(obs);
     }
-    return combineLatest(maped) as Observable<BroadCrumb[]>;
+    return combineLatest(maped) as Observable<Link[]>;
   }
 
   ngAfterViewInit() {

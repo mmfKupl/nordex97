@@ -1,4 +1,4 @@
-export class BroadCrumb {
+export class Link {
   title: string;
   link: string;
 }

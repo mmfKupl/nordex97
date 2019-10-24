@@ -1,8 +1,13 @@
 <header class="header">
+  <div class="header__info">
+    <a class="header__info-a" href="tel:84999678699">8 499 967-86-99</a>
+    <a class="header__info-a" href="tel:89261941998">8 926 194-19-98</a>
+    <a class="header__info-a" href="mailto:nrd2019@mail.ru">nrd2019@mail.ru</a>
+  </div>
   <div class="wrapper">
     <div class="header__main">
       <h1 class="main-name">
-          ООО Нордекс 97
+        ООО Нордекс 97
       </h1>
       <div class="main-search">
         <input
@@ -20,20 +25,13 @@
           (click)="onEnter()"
         />
       </div>
-      <a 
-        class="main-requsites"
-        routerLink="/requisites"
-        >Реквизиты</a>
     </div>
     <app-nav [broadCrumbs$]="currentBroadCrumbs$"></app-nav>
   </div>
 </header>
-<main class="main">
-  <div class="wrapper">
-    <section class="section catalog">
-      <app-catalog-list></app-catalog-list>
-      <router-outlet></router-outlet>
-    </section>
-  </div>
+<main class="main wrapper">
+  <app-catalog-list></app-catalog-list>
+  <section class="section catalog">
+    <router-outlet></router-outlet>
+  </section>
 </main>
-<footer class="footer"></footer>

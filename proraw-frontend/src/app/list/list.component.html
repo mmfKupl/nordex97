@@ -8,7 +8,7 @@
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
       (click)="category.ExpandId ? setCurExpand(category.ExpandId) : null"
     >
-      <span>{{ category.Title }}</span>
+      {{ category.Title }}
       <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
     </a>
     <ul

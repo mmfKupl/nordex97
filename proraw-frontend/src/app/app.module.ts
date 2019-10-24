@@ -16,6 +16,8 @@ import { ListComponent } from './list/list.component';
 import { SearchComponent } from './search/search.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { RequisitesComponent } from './requisites/requisites.component';
+import { AboutPageComponent } from './about-page/about-page.component';
+import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { RequisitesComponent } from './requisites/requisites.component';
     BlockListComponent,
     ListComponent,
     SearchComponent,
-    RequisitesComponent
+    RequisitesComponent,
+    AboutPageComponent,
+    DeliveryPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

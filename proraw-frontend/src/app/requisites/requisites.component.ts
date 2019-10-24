@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 class Requisite {
   name: string;
-  info: string;
+  text: string;
+  isLink?: boolean;
+  link?: string;
 }
 
 @Component({
@@ -14,18 +16,35 @@ export class RequisitesComponent implements OnInit {
   constructor() {}
 
   requisites: Requisite[] = [
-    { name: 'ОГРН', info: '1166733073418' },
-    { name: 'ОКПО', info: '05504099' },
-    { name: 'ИНН/КПП', info: '6732135720 / 673201001' },
+    { name: 'ОГРН', text: '1166733073418' },
+    { name: 'ОКПО', text: '05504099' },
+    { name: 'ИНН/КПП', text: '6732135720 / 673201001' },
     {
       name: 'Юридический адрес',
-      info: 'РФ, 214032, г.Смоленск, ул.Маршала Еременко, д.8Б, офис Р2'
+      text: 'РФ, 214032, г.Смоленск, ул.Маршала Еременко, д.8Б, офис Р2'
     },
     {
       name: 'Фактический (почтовый) адрес',
-      info: 'РФ, 109387, г.Москва, ул.Люблинская, д.42, офис 326-1'
+      text: 'РФ, 109387, г.Москва, ул.Люблинская, д.42, офис 326-1'
     },
-    { name: 'Контактный номер', info: '8-499-967-86-99' }
+    {
+      name: 'Контактный номер 1',
+      text: '8 499 967-86-99',
+      isLink: true,
+      link: 'tel:84999678699'
+    },
+    {
+      name: 'Контактный номер 2',
+      text: '8 926 194-19-98',
+      isLink: true,
+      link: 'tel:89261941998'
+    },
+    {
+      name: 'Email',
+      text: 'nrd2019@mail.ru',
+      isLink: true,
+      link: 'mailto:nrd2019@mail.ru'
+    }
   ];
 
   ngOnInit() {}

@@ -5,9 +5,16 @@
     <span class="nav_underline"></span>
   </a>
   <a
+    class="nav__link"
+    routerLinkActive="nav__link-active"
+    *ngFor="let lick of links"
+    [routerLink]="[lick.link]"
+    >{{ lick.title }}
+  </a>
+  <!-- <a
     class="nav__bread-crumb"
     *ngFor="let broadCrumb of broadCrumbs$ | async"
     [routerLink]="[broadCrumb.link]"
     >{{ broadCrumb.title }}
-  </a>
+  </a> -->
 </nav>

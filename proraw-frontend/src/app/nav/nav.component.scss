@@ -2,6 +2,8 @@
 
 .header__nav {
   display: flex;
+  position: relative;
+  z-index: 5;
 }
 
 .nav__catalog-a {
@@ -45,16 +47,43 @@
   left: 0;
 }
 
+.nav__link {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  margin-right: 2rem;
+  transition: background 350ms, color 300ms;
+  border-radius: 2rem 2rem 0px 0px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    background: rgba(17, 66, 86, 0.49);
+    border-radius: 2rem 2rem 0px 0px;
+    color: #ffffff;
+  }
+
+  &-active {
+    background: rgba(17, 66, 86, 0.49);
+    border-radius: 2rem 2rem 0px 0px;
+    color: #ffffff;
+  }
+}
+
 .nav__bread-crumb {
   align-self: center;
   font-size: 1.2rem;
   text-align: center;
   padding-bottom: 1px;
   position: relative;
+  margin-bottom: 1px;
   transform: translateY(5px);
 }
 
 .nav__bread-crumb:hover {
+  margin-bottom: 0px;
   border-bottom: 1px solid #000000;
 }
 
