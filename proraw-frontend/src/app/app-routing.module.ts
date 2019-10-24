@@ -12,7 +12,7 @@ import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'catalog',
+    redirectTo: 'about',
     pathMatch: 'full'
   },
   {

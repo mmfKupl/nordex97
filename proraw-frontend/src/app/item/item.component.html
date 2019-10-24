@@ -1,15 +1,17 @@
 <div class="item" *ngIf="curentItem">
   <h1 class="item__h3">{{ curentItem.Title }}</h1>
   <div class="item__info">
-    <p class="item__info-article"> <span class="article"> Артикул - </span>{{ curentItem.VendorCode }}</p>
+    <p class="item__info-article">
+      <span class="article"> Артикул - </span>{{ curentItem.VendorCode }}
+    </p>
     <p class="item__info-available">
       {{ curentItem.Available ? 'в наличии' : 'нет в наличии' }}
     </p>
   </div>
   <p class="item__description">{{ curentItem.Description }}</p>
   <div class="item__characters">
-      <p class="item__characters-text">Характеристики</p>
-    </div>
+    <p class="item__characters-text">Характеристики</p>
+  </div>
   <table class="item__table">
     <tbody class="item__table-tbody">
       <tr class="item__table-tr" *ngFor="let prop of itemProperty">

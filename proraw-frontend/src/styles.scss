@@ -57,10 +57,39 @@ strong {
   flex-direction: column;
   padding: 2rem 2rem 0;
 
+  &__h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  .no-m-b {
+    margin-bottom: 0;
+  }
+  &__h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__ul {
+    margin-left: 1.5rem;
+    list-style: disc;
+    font-size: 1.2rem;
+  }
+
   .item__characters {
     width: 100%;
     margin-bottom: 0.5rem;
     font-weight: bold;
     font-size: 1.5rem;
+
+    &-link:hover {
+      border-bottom: 1px solid #466083;
+      color: #466083;
+    }
+  }
+
+  .item__characters-text {
+    text-indent: 2rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
   }
 }
