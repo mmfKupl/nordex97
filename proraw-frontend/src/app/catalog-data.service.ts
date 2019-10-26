@@ -5,6 +5,9 @@ import { Item } from './item';
 import { catchError, map, tap, filter } from 'rxjs/operators';
 import { Category } from './category';
 
+const domen = 'http://a0348460.xsph.ru';
+// const domen = 'http://localhost:4000';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,16 +18,10 @@ export class CatalogDataService {
   constructor(private httpClient: HttpClient) {}
 
   getСategories(): Observable<Category[]> {
-    // return this.httpClient.get('http://localhost:4000/api/categories').pipe(
-    //   catchError(err => {
-    //     console.log(err.message);
-    //     return [];
-    //   })
-    // );
     if (Array.isArray(this.categories)) {
       return of(this.categories);
     }
-    return this.httpClient.get<Category[]>('api/categories').pipe(
+    return this.httpClient.get<Category[]>(domen + '/api/categories').pipe(
       map(data => {
         const maped: Category[] = [];
         for (const el of data) {
@@ -43,6 +40,10 @@ export class CatalogDataService {
       }),
       tap(data => {
         this.categories = data;
+      }),
+      catchError(err => {
+        console.log(err.message);
+        return [];
       })
     );
   }
@@ -67,17 +68,10 @@ export class CatalogDataService {
   }
 
   getItemsByCategoryId(categoryId: number): Observable<Item[]> {
-    // return this.httpClient.get(`http://localhost:4000/api/items/${num}`).pipe(
-    //   catchError(err => {
-    //     console.log(err.message);
-    //     return [];
-    //   })
-    // );
-    console.log(categoryId);
     if (this.items && this.items[categoryId] && this.items[categoryId].length) {
       return of(this.items[categoryId]);
     }
-    return this.httpClient.get<Item[]>(`api/items`).pipe(
+    return this.httpClient.get<Item[]>(`${domen}/api/items/${categoryId}`).pipe(
       map(items => {
         return items.filter(item => {
           return item.IDCategory === categoryId;
@@ -87,7 +81,10 @@ export class CatalogDataService {
         console.log(items);
         this.items[categoryId] = items;
       }),
-      catchError(err => [])
+      catchError(err => {
+        console.log(err.message);
+        return [];
+      })
     );
   }
 
@@ -101,19 +98,11 @@ export class CatalogDataService {
   }
 
   getSearchedData(str: string): Observable<Item[]> {
-    // return this.httpClient.get(`http://localhost:4000/api/search/${str}`).pipe(
-    //   catchError(err => {
-    //     console.log(err.message);
-    //     return [];
-    //   })
-    // );
-    return this.httpClient.get<Item[]>('api/items').pipe(
-      map(items => {
-        return items.filter(item => {
-          return item.VendorCode.toString().includes(str);
-        });
-      }),
-      catchError(err => [])
+    return this.httpClient.get<Item[]>(`${domen}/api/search/${str}`).pipe(
+      catchError(err => {
+        console.log(err.message);
+        return [];
+      })
     );
   }
 }

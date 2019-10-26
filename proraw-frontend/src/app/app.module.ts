@@ -38,10 +38,10 @@ import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CommonModule,
     AppRoutingModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
-    })
+    HttpClientModule
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+    //   dataEncapsulation: false
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]

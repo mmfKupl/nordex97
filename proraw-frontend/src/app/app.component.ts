@@ -21,9 +21,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
   searchPlaceholder = 'Поиск по каталогу';
   searchSubscription: Subscription;
-  routeSubscription: Subscription;
   searchStr: string;
-  currentBroadCrumbs$: Observable<Link[]>;
+  currentBreadCrumbs$: Observable<Link[]>;
   dataFetched = false;
 
   constructor(private router: Router, private cd: CatalogDataService) {}
@@ -32,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
-        this.currentBroadCrumbs$ = this.getBreadCrumbs(
+        this.currentBreadCrumbs$ = this.getBreadCrumbs(
           e.url.split('/').filter(Boolean)
         );
         if (!e.url.includes('search') && !!this.searchInput) {
@@ -44,7 +43,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
-    this.routeSubscription.unsubscribe();
   }
 
   getBreadCrumbs(url: string[]): Observable<Link[]> {

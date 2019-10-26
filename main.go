@@ -23,11 +23,13 @@ const (
 
 // Section ...
 type Section struct {
+	ID          int
 	Title, link string
 }
 
 // Item ...
 type Item struct {
+	Category    int    `json:"category"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Article     string `json:"article"`
@@ -44,7 +46,7 @@ var totalItemAmount = 0
 var currentItemAmount = 0
 
 func init() {
-	const sectionsQuery = ".v-catalog__list > li > a.v-catalog__link"
+	const sectionsQuery = ".v-catalog__content a:not(.v-catalog__expand)"
 	// download all sections and group they
 	page, err := downloadPage(sitePath)
 	if err != nil {
@@ -53,6 +55,7 @@ func init() {
 
 	secs := page.Find(sectionsQuery)
 	sectionsList = make([]Section, secs.Length())
+
 	secs.Each(func(i int, s *goquery.Selection) {
 		href, ok := s.Attr("href")
 		if !ok {
@@ -63,7 +66,7 @@ func init() {
 		href = re.ReplaceAllString(href, "")
 		href = sitePath + re1.ReplaceAllString(href, "_")
 		text := s.Text()
-		sectionsList[i] = Section{text, href}
+		sectionsList[i] = Section{i + 1, text, href}
 	})
 }
 
@@ -101,11 +104,11 @@ func startDownload(sections []Section, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for _, val := range sections {
 		wg.Add(1)
-		go parseSection(val, wg)
+		go parseSection(val, wg, val.ID)
 	}
 }
 
-func parseSection(section Section, wg *sync.WaitGroup) {
+func parseSection(section Section, wg *sync.WaitGroup, ind int) {
 	defer wg.Done()
 	fmt.Printf("%+s\n", section.link)
 	page, err := downloadPage(section.link)
@@ -118,12 +121,12 @@ func parseSection(section Section, wg *sync.WaitGroup) {
 
 	if pagesAmount == 0 {
 		wg.Add(1)
-		go parsePageSection(page, wg)
+		go parsePageSection(page, wg, ind)
 	}
 
 }
 
-func parsePageSection(page *goquery.Document, wg *sync.WaitGroup) {
+func parsePageSection(page *goquery.Document, wg *sync.WaitGroup, ind int) {
 	defer wg.Done()
 	itemsLinks := page.Find(".v-products-tbl__title > .v-products-tbl__name").Map(func(i int, s *goquery.Selection) string {
 		href, _ := s.Attr("href")
@@ -134,11 +137,11 @@ func parsePageSection(page *goquery.Document, wg *sync.WaitGroup) {
 	for _, val := range itemsLinks {
 		wg.Add(1)
 		waitChan <- struct{}{}
-		go parseItemPage(val, wg)
+		go parseItemPage(val, wg, ind)
 	}
 }
 
-func parseItemPage(url string, wg *sync.WaitGroup) {
+func parseItemPage(url string, wg *sync.WaitGroup, ind int) {
 	page, err := downloadPage(url)
 	if err != nil {
 		fmt.Println()
@@ -162,20 +165,20 @@ func parseItemPage(url string, wg *sync.WaitGroup) {
 
 	article = strings.Trim(article, " \n\t")
 
-	item := Item{title, description, article, property, available}
+	item := Item{ind, title, description, article, property, available}
 	itemsChan <- item
 
 }
 
 func saveItemToJSON(wg *sync.WaitGroup) {
-	jsonFileName := "proraw.json"
+	jsonFileName := "proraw.js"
 	file, err := os.Create(jsonFileName)
 	if err != nil {
-		fmt.Println("невозможно открыть и создать файл json")
+		fmt.Println("невозможно открыть и создать файл js")
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	file.WriteString("[")
+	file.WriteString("exports.arr = [")
 	first := true
 	for it := range itemsChan {
 		if !first {
