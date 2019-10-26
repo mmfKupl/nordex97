@@ -37,21 +37,21 @@ export const sqlCon = {
     return this.sqlCon;
   },
   async getCategory() {
-    if (!sqlCon && this.activated) {
+    if (!this.sqlCon && this.activated) {
       await this.init();
     }
     const data = await query('call GetCategoryTable()', [], this.sqlCon);
     return data[0];
   },
   async getItems() {
-    if (!sqlCon && this.activated) {
+    if (!this.sqlCon && this.activated) {
       await this.init();
     }
     const data = await query('call GetItemTable()', [], this.sqlCon);
     return data[0];
   },
   async getItemsByCategoryId(categoryId: number) {
-    if (!sqlCon && this.activated) {
+    if (!this.sqlCon && this.activated) {
       await this.init();
     }
     const data = await query(
@@ -62,7 +62,7 @@ export const sqlCon = {
     return data[0];
   },
   async getSearchData(queryStr: string) {
-    if (!sqlCon && this.activated) {
+    if (!this.sqlCon && this.activated) {
       await this.init();
     }
     queryStr = `%${queryStr}%`;
