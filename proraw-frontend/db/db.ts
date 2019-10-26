@@ -27,54 +27,41 @@ function query(str, params, conn) {
   });
 }
 
-export const sqlCon = {
-  sqlCon: null,
-  activated: false,
+export const sqlConn = {
   async init() {
-    this.activated = false;
-    this.sqlCon = await connect(mySql.createConnection(dbConfig));
-    this.activated = true;
-    return this.sqlCon;
+    const sqlCon = mySql.createConnection(dbConfig);
+    await connect(sqlCon);
+    return sqlCon;
   },
   async getCategory() {
-    if (!this.sqlCon && this.activated) {
-      await this.init();
-    }
-    const data = await query('call GetCategoryTable()', [], this.sqlCon);
+    const conn = await this.init();
+    const data = await query('call GetCategoryTable()', [], conn);
+    conn.end();
     return data[0];
   },
   async getItems() {
-    if (!this.sqlCon && this.activated) {
-      await this.init();
-    }
-    const data = await query('call GetItemTable()', [], this.sqlCon);
+    const conn = await this.init();
+    const data = await query('call GetItemTable()', [], conn);
+    conn.end();
     return data[0];
   },
   async getItemsByCategoryId(categoryId: number) {
-    if (!this.sqlCon && this.activated) {
-      await this.init();
-    }
-    const data = await query(
-      'call GetItemByCategoryId(?)',
-      [categoryId],
-      this.sqlCon
-    );
+    const conn = await this.init();
+    const data = await query('call GetItemByCategoryId(?)', [categoryId], conn);
+    conn.end();
     return data[0];
   },
   async getSearchData(queryStr: string) {
-    if (!this.sqlCon && this.activated) {
-      await this.init();
-    }
+    const conn = await this.init();
     queryStr = `%${queryStr}%`;
-    const data = await query('call GetSearchData(?)', [queryStr], this.sqlCon);
+    const data = await query('call GetSearchData(?)', [queryStr], conn);
+    conn.end();
     return data[0];
   }
 };
 
-sqlCon.init();
-
 router.get('/api/items', (req, res, next) => {
-  sqlCon
+  sqlConn
     .getItems()
     .then(data => {
       const recordset = (data && data[0]) || [];
@@ -86,7 +73,7 @@ router.get('/api/items', (req, res, next) => {
 });
 
 router.get('/api/categories', (req, res, next) => {
-  sqlCon
+  sqlConn
     .getCategory()
     .then(data => {
       const recordset = (data && data[0]) || [];
@@ -99,7 +86,7 @@ router.get('/api/categories', (req, res, next) => {
 
 router.get('/api/items/:categoryId', (req, res, next) => {
   const categoryId = +req.params.categoryId;
-  sqlCon
+  sqlConn
     .getItemsByCategoryId(categoryId)
     .then(data => {
       const recordset = (data && data[0]) || [];
@@ -111,7 +98,7 @@ router.get('/api/items/:categoryId', (req, res, next) => {
 });
 
 router.get('/api/search/:query', (req, res, next) => {
-  sqlCon
+  sqlConn
     .getSearchData(req.params.query)
     .then(data => {
       const recordset = (data && data[0]) || [];
