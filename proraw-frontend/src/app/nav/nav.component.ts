@@ -8,8 +8,6 @@ import { Link } from '../broad-crumb';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  @Input() broadCrumbs$: Observable<Link[]>;
-
   links: Link[] = [
     { title: 'О компании', link: '/about' },
     { title: 'Доставка', link: '/delivery' },

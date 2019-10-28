@@ -78,7 +78,6 @@ export class CatalogDataService {
         });
       }),
       tap(items => {
-        console.log(items);
         this.items[categoryId] = items;
       }),
       catchError(err => {

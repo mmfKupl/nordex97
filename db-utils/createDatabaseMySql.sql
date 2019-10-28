@@ -1,4 +1,4 @@
-use a0348460_nordex97_test;
+﻿use a0348460_nordex97_test;
 
 create table Category (
 	IDCategory int not null AUTO_INCREMENT,
@@ -46,8 +46,6 @@ Available bit)
 insert into Item(IDCategory, Title, Description, VendorCode, Property, Available)
 values(IDCategory, Title, Description, VendorCode, Property, Available);
 
-select * from Item where Property like '%&#176;%';
-update Item set Property = replace(Property, '&#176;', '°') where Property like '%&#176;%';
 
 
 

@@ -15,9 +15,7 @@ export class ItemListComponent implements OnInit {
   constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    console.log('?');
     this.currentItems$ = this.route.paramMap.pipe(
-      tap(d => console.log(d)),
       map(data => +data.get('id')),
       switchMap(id => this.cd.getItemsByCategoryId(id))
     );

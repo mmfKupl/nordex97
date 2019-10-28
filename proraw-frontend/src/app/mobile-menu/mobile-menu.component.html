@@ -1,0 +1,21 @@
+<section class="mobile-menu__wrapper" [ngClass]="displayClasses">
+  <header class="mobile-menu__header">
+    <h1 class="header__main-name">
+      ООО Нордекс 97
+      <span>Продажа всех видов пластика</span>
+    </h1>
+    <button class="button header__menu-close-button" (click)="onCloseMenu()">
+      <
+    </button>
+  </header>
+  <main class="mobile-menu__main">
+    <app-nav></app-nav>
+  </main>
+  <footer class="mobile-menu__footer">
+    <a class="footer__info-a" href="mailto:nrd2019@mail.ru">nrd2019@mail.ru</a>
+    <p class="footer__bottom-group">
+      <a class="footer__info-a" href="tel:84999678699">8 499 967-86-99</a>
+      <a class="footer__info-a" href="tel:89261941998">8 926 194-19-98</a>
+    </p>
+  </footer>
+</section>

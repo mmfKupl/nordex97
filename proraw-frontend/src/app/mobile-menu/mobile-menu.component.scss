@@ -1,0 +1,27 @@
+@import '../../variables.scss';
+
+.mobile-menu {
+  &__wrapper {
+    display: block;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background-color: $list-bg;
+    display: flex;
+    flex-direction: column;
+    left: -150%;
+    transition: transform 500ms;
+  }
+  &--open {
+    transform: translateX(150%);
+  }
+
+  &__header {
+    background-color: red;
+  }
+
+  &__footer {
+    margin-top: auto;
+    background-color: green;
+  }
+}

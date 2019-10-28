@@ -18,6 +18,8 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { RequisitesComponent } from './requisites/requisites.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
+import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
     SearchComponent,
     RequisitesComponent,
     AboutPageComponent,
-    DeliveryPageComponent
+    DeliveryPageComponent,
+    MobileMenuComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CommonModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DeviceDetectorModule.forRoot()
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
     //   dataEncapsulation: false
     // })

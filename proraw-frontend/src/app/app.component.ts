@@ -10,7 +10,9 @@ import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 import { CatalogDataService } from './catalog-data.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { Link } from './broad-crumb';
+import { Category } from './category';
 
 @Component({
   selector: 'app-root',
@@ -22,18 +24,37 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   searchPlaceholder = 'Поиск по каталогу';
   searchSubscription: Subscription;
   searchStr: string;
-  currentBreadCrumbs$: Observable<Link[]>;
   dataFetched = false;
 
-  constructor(private router: Router, private cd: CatalogDataService) {}
+  currentCategory: Link;
+  currentCategorySubscription: Subscription;
+
+  currentPage: Link;
+  currentPageSubscription: Subscription;
+
+  // TODO:
+  // when all stuff will work -> change to false
+  mobileMenuOpenStatus = true;
+
+  constructor(
+    private router: Router,
+    private cd: CatalogDataService,
+    private dd: DeviceDetectorService
+  ) {}
 
   ngOnInit() {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
-        this.currentBreadCrumbs$ = this.getBreadCrumbs(
-          e.url.split('/').filter(Boolean)
-        );
+        if (this.isMobile) {
+          const urls = e.url.split('/').filter(Boolean);
+          this.currentCategorySubscription = this.getCurrentCategory(
+            urls
+          ).subscribe(cur => (this.currentCategory = cur));
+          this.currentPageSubscription = this.getCurrentPage(urls).subscribe(
+            cur => (this.currentPage = cur)
+          );
+        }
         if (!e.url.includes('search') && !!this.searchInput) {
           this.searchInput.nativeElement.value = null;
           this.searchStr = '';
@@ -41,19 +62,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
-  getBreadCrumbs(url: string[]): Observable<Link[]> {
-    const [catalog, category, item] = url;
-    const maped = [];
-    if (catalog === 'catalog') {
-      maped.push(of({ title: 'Каталог', link: 'catalog' }));
-    }
-    if (catalog === 'requisites') {
-      maped.push(of({ title: 'Реквизиты', link: 'requisites' }));
-    }
+  getCurrentCategory(url: string[]): Observable<Link | null> {
+    const [, category] = url;
     if (+category >= 0) {
       const obs = this.cd.getCurrentCategory(+category).pipe(
         map(v => ({
@@ -61,20 +71,34 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           link: v.IDCategory ? `catalog/${v.IDCategory}` : 'catalog'
         }))
       );
-      maped.push(obs);
+      return obs;
     }
-    if (+item >= 0) {
-      const obs = this.cd.getItemByIdAndCategoryId(+item, +category).pipe(
-        map(v => ({
-          title: v.Title || 'не найден',
-          link: v.IDItem
-            ? `catalog/${v.IDCategory}/${v.IDItem}`
-            : `catalog/${+category}`
-        }))
-      );
-      maped.push(obs);
+    return of(null);
+  }
+
+  getCurrentPage(url: string[]): Observable<Link | null> {
+    const [link] = url;
+    if (link === 'catalog') {
+      return of({ title: 'Каталог', link });
     }
-    return combineLatest(maped) as Observable<Link[]>;
+    if (link === 'requisites') {
+      return of({ title: 'Реквизиты', link });
+    }
+    if (link === 'about') {
+      return of({ title: 'О компании', link });
+    }
+    if (link === 'delivery') {
+      return of({ title: 'Доставка', link });
+    }
+    return null;
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+    if (this.isMobile) {
+      this.currentCategorySubscription.unsubscribe();
+      this.currentPageSubscription.unsubscribe();
+    }
   }
 
   ngAfterViewInit() {
@@ -97,5 +121,21 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         queryParams: { query: this.searchStr }
       });
     }
+  }
+
+  openMobileMenu() {
+    this.mobileMenuOpenStatus = true;
+  }
+
+  onMobileStatusChanged(nextStatus: boolean) {
+    this.mobileMenuOpenStatus = nextStatus;
+  }
+
+  get isNotMobile() {
+    return !this.dd.isMobile();
+  }
+
+  get isMobile() {
+    return this.dd.isMobile();
   }
 }
