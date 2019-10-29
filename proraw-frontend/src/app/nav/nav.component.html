@@ -1,14 +1,15 @@
-<nav class="header__nav">
-  <a routerLink="/catalog" class="nav__catalog-a">
+<nav class="header__nav" [class.mobile]="isMobile">
+  <a routerLink="/catalog" class="nav__catalog-a" [class.mobile]="isMobile">
     Каталог товаров
-    <span class="nav_underline nav_underline-extra"></span>
-    <span class="nav_underline"></span>
+    <span *ngIf="!isMobile" class="nav_underline nav_underline-extra"></span>
+    <span *ngIf="!isMobile" class="nav_underline"></span>
   </a>
   <a
     class="nav__link"
     routerLinkActive="nav__link-active"
     *ngFor="let lick of links"
     [routerLink]="[lick.link]"
+    [class.mobile]="isMobile"
     >{{ lick.title }}
   </a>
 </nav>

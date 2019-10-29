@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO:
   // when all stuff will work -> change to false
-  mobileMenuOpenStatus = true;
+  mobileMenuOpenStatus = false;
 
   constructor(
     private router: Router,
