@@ -16,13 +16,9 @@ export class ItemCardComponent implements OnInit {
 
   linkStr: string;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit() {
     this.linkStr = `catalog/${this.itemCategoryId}/${this.itemId}`;
-  }
-
-  routeTo() {
-    this.router.navigateByUrl(`catalog/${this.itemCategoryId}/${this.itemId}`);
   }
 }

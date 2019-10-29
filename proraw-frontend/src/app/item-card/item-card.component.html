@@ -1,5 +1,8 @@
 <div class="item">
-  <a class="item__wrapper" (click)="routeTo()">
+  <a
+    class="item__wrapper"
+    [routerLink]="['../../catalog', itemCategoryId, itemId]"
+  >
     <div class="item__info">
       <p class="info-article">
         <span class="article">Артикул - </span
