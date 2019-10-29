@@ -65,13 +65,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   getCurrentCategory(url: string[]): Observable<Link | null> {
     const [, category] = url;
     if (+category >= 0) {
-      const obs = this.cd.getCurrentCategory(+category).pipe(
+      return this.cd.getCurrentCategory(+category).pipe(
         map(v => ({
           title: v.Title || 'не найден',
           link: v.IDCategory ? `catalog/${v.IDCategory}` : 'catalog'
         }))
       );
-      return obs;
+    } else if (category && category.includes('search')) {
+      return of({ title: 'Поиск по каталогу', link: '' });
     }
     return of(null);
   }
@@ -79,7 +80,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   getCurrentPage(url: string[]): Observable<Link | null> {
     const [link] = url;
     if (link === 'catalog') {
-      return of({ title: 'Каталог', link });
+      return of({ title: 'Каталог товаров', link });
     }
     if (link === 'requisites') {
       return of({ title: 'Реквизиты', link });

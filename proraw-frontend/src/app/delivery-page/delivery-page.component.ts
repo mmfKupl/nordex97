@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-delivery-page',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delivery-page.component.scss']
 })
 export class DeliveryPageComponent implements OnInit {
+  constructor(private dd: DeviceDetectorService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  get isMobile() {
+    return this.dd.isMobile();
   }
-
 }

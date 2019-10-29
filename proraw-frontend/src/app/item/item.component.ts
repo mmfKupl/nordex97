@@ -3,6 +3,7 @@ import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Item } from '../item';
 import { Subscription } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-catalog-item',
@@ -16,7 +17,11 @@ export class ItemComponent implements OnInit, OnDestroy {
   itemProperty: string[][];
 
   getItemSubscription: Subscription;
-  constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
+  constructor(
+    private cd: CatalogDataService,
+    private route: ActivatedRoute,
+    private dd: DeviceDetectorService
+  ) {}
 
   ngOnInit() {
     this.currentCategoryId = +this.route.snapshot.url[0].path;
@@ -33,5 +38,9 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.getItemSubscription.unsubscribe();
+  }
+
+  get isMobile() {
+    return this.dd.isMobile();
   }
 }

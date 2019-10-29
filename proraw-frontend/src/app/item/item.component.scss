@@ -6,8 +6,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-left: 2rem;
-  padding-top: 2rem;
+  padding: 2rem 2rem 0;
 }
 
 .item__h3 {
@@ -59,4 +58,18 @@
   width: 50%;
   border-bottom: 1px solid #a8c1df;
   padding: 0.3rem 0;
+}
+
+.item.mobile {
+  .item__h3 {
+    font-size: 1.5rem;
+  }
+
+  .item__table-tr .item__table-td:last-child {
+    text-align: right;
+  }
+
+  .item__table {
+    margin-bottom: 1rem;
+  }
 }

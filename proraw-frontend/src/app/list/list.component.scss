@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-:host {
+:host:not(.mobile) {
   position: absolute;
   top: 0;
   left: 2rem;
@@ -17,6 +17,53 @@
   z-index: 10;
   color: $list-font-color;
   margin-bottom: 2rem;
+}
+
+.main__ul.mobile {
+  color: $list-li-active;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: unset;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: unset;
+  font-weight: 700;
+
+  & .main__a {
+    font-size: 1.2rem;
+  }
+
+  .main__li {
+    background-color: unset;
+  }
+
+  & .button__span {
+    background-image: url('../../assets/icons/angle-up-solid-black.svg');
+  }
+
+  & .main__ul-expand {
+    background-color: unset;
+    box-shadow: unset;
+    opacity: 1;
+
+    .main__li {
+      font-size: 1rem;
+      width: 100%;
+      height: auto;
+      &.sub {
+        height: auto;
+        visibility: visible;
+
+        .main__a {
+          font-weight: 600;
+          color: $list-li-active;
+          height: 3rem;
+          padding: 1rem 1rem 1rem 4rem;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
 .main__li {

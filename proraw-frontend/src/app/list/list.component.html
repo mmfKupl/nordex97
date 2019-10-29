@@ -1,4 +1,4 @@
-<ul class="main__ul">
+<ul class="main__ul" [class.mobile]="isMobile">
   <li class="main__li" *ngFor="let category of categories; let i = index">
     <a
       class="main__a"
@@ -9,7 +9,11 @@
       (click)="category.ExpandId ? setCurExpand(category.ExpandId) : null"
     >
       {{ category.Title }}
-      <span class="button__span" *ngIf="category.ExpandId" type="button"></span>
+      <span
+        class="button__span"
+        *ngIf="category.ExpandId && !isMobile"
+        type="button"
+      ></span>
     </a>
     <ul
       class="main__ul-expand"

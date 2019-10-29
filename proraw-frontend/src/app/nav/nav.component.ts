@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Link } from '../broad-crumb';
 
 @Component({
@@ -9,6 +8,7 @@ import { Link } from '../broad-crumb';
 })
 export class NavComponent implements OnInit {
   @Input() isMobile = false;
+  @Output() lickClick = new EventEmitter<boolean>(false);
 
   links: Link[] = [
     { title: 'О компании', link: '/about' },
@@ -19,4 +19,8 @@ export class NavComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  onLinkClick() {
+    this.lickClick.emit(true);
+  }
 }

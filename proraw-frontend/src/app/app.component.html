@@ -3,7 +3,7 @@
   [isOpen]="mobileMenuOpenStatus"
   (isOpenChanges)="onMobileStatusChanged($event)"
 ></app-mobile-menu>
-<header class="header">
+<header class="header" [class.mobile]="isMobile">
   <div class="header__info" *ngIf="isNotMobile">
     <div class="wrapper">
       <a class="header__info-a" href="tel:84999678699">8 499 967-86-99</a>
@@ -14,47 +14,58 @@
     </div>
   </div>
   <div class="wrapper">
-    <div class="header__main">
+    <div class="header__main" [class.mobile]="isMobile">
       <h1 class="main-name" *ngIf="isNotMobile">
         ООО Нордекс 97
         <span>Продажа всех видов пластика</span>
       </h1>
-      <button
-        *ngIf="isMobile"
-        (click)="openMobileMenu()"
-        class="button header__menu-open-button"
-      >
-        >
-      </button>
-      <div class="main-search">
+      <div class="main-header" [class.mobile]="isMobile">
         <input
-          #searchInput
-          class="input search__input"
-          type="text"
-          [placeholder]="searchPlaceholder"
-          (keydown.enter)="onEnter()"
-        />
-        <input
-          class="input search__button"
           type="button"
-          aria-label="search
-        button"
-          (click)="onEnter()"
+          *ngIf="isMobile"
+          (click)="openMobileMenu()"
+          class="button header__menu-open-button"
         />
+        <div class="main-search" [class.mobile]="isMobile">
+          <input
+            #searchInput
+            class="input search__input"
+            type="text"
+            [placeholder]="searchPlaceholder"
+            (keydown.enter)="onEnter()"
+          />
+          <input
+            class="input search__button"
+            type="button"
+            aria-label="search
+          button"
+            (click)="onEnter()"
+          />
+        </div>
       </div>
 
-      <a *ngIf="currentPage" [routerLink]="currentPage.link">{{
-        currentPage.title
-      }}</a>
-      <a *ngIf="currentCategory" [routerLink]="currentCategory.link">{{
-        currentCategory.title
-      }}</a>
+      <a
+        class="current-page"
+        *ngIf="currentPage"
+        [routerLink]="currentPage.link"
+        >{{ currentPage.title }}</a
+      >
+      <a
+        class="current-category"
+        *ngIf="currentCategory"
+        [routerLink]="currentCategory.link"
+        >{{ currentCategory.title }}</a
+      >
     </div>
     <app-nav *ngIf="isNotMobile"></app-nav>
   </div>
 </header>
-<main class="main wrapper">
-  <app-catalog-list *ngIf="isNotMobile"></app-catalog-list>
+<main class="main wrapper" [class.mobile]="isMobile">
+  <app-catalog-list
+    [class.mobile]="isMobile"
+    [isMobile]="isMobile"
+    *ngIf="!isMobile || (currentPage?.link === 'catalog' && !currentCategory)"
+  ></app-catalog-list>
   <section class="section catalog">
     <router-outlet></router-outlet>
   </section>

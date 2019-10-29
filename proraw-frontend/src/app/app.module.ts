@@ -14,7 +14,6 @@ import { ItemCardComponent } from './item-card/item-card.component';
 import { BlockListComponent } from './block-list/block-list.component';
 import { ListComponent } from './list/list.component';
 import { SearchComponent } from './search/search.component';
-import { CatalogComponent } from './catalog/catalog.component';
 import { RequisitesComponent } from './requisites/requisites.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
@@ -25,7 +24,6 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
   declarations: [
     AppComponent,
     NavComponent,
-    CatalogComponent,
     ItemComponent,
     ItemListComponent,
     ItemCardComponent,

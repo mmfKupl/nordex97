@@ -88,8 +88,20 @@ strong {
   }
 
   .item__characters-text {
-    text-indent: 2rem;
     margin-bottom: 1.2rem;
     font-size: 1.2rem;
+  }
+}
+
+.item-page.mobile {
+  .item-page__h1 {
+    font-size: 1.5rem;
+  }
+  .item-page__h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .item-page__ul {
+    margin-bottom: 1rem;
   }
 }

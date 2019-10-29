@@ -20,6 +20,10 @@ export class MobileMenuComponent implements OnInit {
     this.isOpen = false;
   }
 
+  onLickClick() {
+    this.onCloseMenu();
+  }
+
   get displayClasses() {
     return {
       'mobile-menu--open': this.isOpen

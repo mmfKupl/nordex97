@@ -13,7 +13,7 @@
     </div>
   </header>
   <main class="mobile-menu__main">
-    <app-nav [isMobile]="isMobile"></app-nav>
+    <app-nav [isMobile]="isMobile" (lickClick)="onLickClick()"></app-nav>
   </main>
   <footer class="mobile-menu__footer">
     <a class="footer__info-mail" href="mailto:nrd2019@mail.ru"

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Item } from '../item';
 import { map, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-item-list',
@@ -12,12 +13,20 @@ import { map, tap, switchMap, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ItemListComponent implements OnInit {
   currentItems$: Observable<Item[]>;
-  constructor(private cd: CatalogDataService, private route: ActivatedRoute) {}
+  constructor(
+    private cd: CatalogDataService,
+    private route: ActivatedRoute,
+    private dd: DeviceDetectorService
+  ) {}
 
   ngOnInit() {
     this.currentItems$ = this.route.paramMap.pipe(
       map(data => +data.get('id')),
       switchMap(id => this.cd.getItemsByCategoryId(id))
     );
+  }
+
+  get isMobile() {
+    return this.dd.isMobile();
   }
 }

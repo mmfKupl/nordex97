@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { Category } from 'src/app/category';
 
@@ -8,6 +8,7 @@ import { Category } from 'src/app/category';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  @Input() isMobile = false;
   categories: Category[];
   curExpandId: {} = {};
   constructor(private cd: CatalogDataService) {}
@@ -37,6 +38,6 @@ export class ListComponent implements OnInit {
   }
 
   getExpandStyle(amountOfItems: number = 0, expand = false) {
-    return expand ? amountOfItems * 14 * 3 : 0;
+    return expand || this.isMobile ? amountOfItems * 14 * 3 : 0;
   }
 }

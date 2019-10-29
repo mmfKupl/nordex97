@@ -3,7 +3,7 @@
 .mobile-menu {
   &__wrapper {
     display: block;
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 10;

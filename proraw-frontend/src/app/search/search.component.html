@@ -1,5 +1,6 @@
 <app-item-card
   *ngFor="let item of items$ | async; let i = index"
+  [class.mobile]="isMobile"
   [itemTitle]="item.Title"
   [itemAvailable]="item.Available"
   [itemVendorCode]="item.VendorCode"

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 class Requisite {
   name: string;
@@ -13,7 +14,7 @@ class Requisite {
   styleUrls: ['./requisites.component.scss']
 })
 export class RequisitesComponent implements OnInit {
-  constructor() {}
+  constructor(private dd: DeviceDetectorService) {}
 
   requisites: Requisite[] = [
     { name: 'ОГРН', text: '1166733073418' },
@@ -48,4 +49,8 @@ export class RequisitesComponent implements OnInit {
   ];
 
   ngOnInit() {}
+
+  get isMobile() {
+    return this.dd.isMobile();
+  }
 }
