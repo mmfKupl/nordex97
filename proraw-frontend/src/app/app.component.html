@@ -46,13 +46,13 @@
 
       <a
         class="current-page"
-        *ngIf="currentPage"
+        *ngIf="currentPage && isMobile"
         [routerLink]="currentPage.link"
         >{{ currentPage.title }}</a
       >
       <a
         class="current-category"
-        *ngIf="currentCategory"
+        *ngIf="currentCategory && isMobile"
         [routerLink]="currentCategory.link"
         >{{ currentCategory.title }}</a
       >
@@ -64,7 +64,7 @@
   <app-catalog-list
     [class.mobile]="isMobile"
     [isMobile]="isMobile"
-    *ngIf="!isMobile || (currentPage?.link === 'catalog' && !currentCategory)"
+    *ngIf="isNotMobile || (currentPage?.link === 'catalog' && !currentCategory)"
   ></app-catalog-list>
   <section class="section catalog">
     <router-outlet></router-outlet>

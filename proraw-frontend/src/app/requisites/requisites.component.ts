@@ -50,7 +50,11 @@ export class RequisitesComponent implements OnInit {
 
   ngOnInit() {}
 
+  get isMobileWidth() {
+    return window.innerWidth <= 900;
+  }
+
   get isMobile() {
-    return this.dd.isMobile();
+    return this.dd.isMobile() || this.isMobileWidth;
   }
 }

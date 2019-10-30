@@ -27,7 +27,11 @@ export class SearchComponent implements OnInit {
     );
   }
 
+  get isMobileWidth() {
+    return window.innerWidth <= 900;
+  }
+
   get isMobile() {
-    return this.dd.isMobile();
+    return this.dd.isMobile() || this.isMobileWidth;
   }
 }

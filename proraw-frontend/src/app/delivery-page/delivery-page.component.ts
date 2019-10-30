@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
@@ -11,7 +11,11 @@ export class DeliveryPageComponent implements OnInit {
 
   ngOnInit() {}
 
+  get isMobileWidth() {
+    return window.innerWidth <= 900;
+  }
+
   get isMobile() {
-    return this.dd.isMobile();
+    return this.dd.isMobile() || this.isMobileWidth;
   }
 }

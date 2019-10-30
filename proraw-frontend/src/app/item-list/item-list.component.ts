@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  HostListener
+} from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -26,7 +32,11 @@ export class ItemListComponent implements OnInit {
     );
   }
 
+  get isMobileWidth() {
+    return window.innerWidth <= 900;
+  }
+
   get isMobile() {
-    return this.dd.isMobile();
+    return this.dd.isMobile() || this.isMobileWidth;
   }
 }

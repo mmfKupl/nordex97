@@ -4,7 +4,8 @@ import {
   ViewChild,
   AfterViewInit,
   ElementRef,
-  OnDestroy
+  OnDestroy,
+  HostListener
 } from '@angular/core';
 import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
@@ -41,6 +42,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private cd: CatalogDataService,
     private dd: DeviceDetectorService
   ) {}
+
+  @HostListener('window:resize')
+  isMobileWidth() {
+    return window.innerWidth <= 900;
+  }
 
   ngOnInit() {
     this.router.events
@@ -133,10 +139,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get isNotMobile() {
-    return !this.dd.isMobile();
+    return !this.dd.isMobile() && !this.isMobileWidth();
   }
 
   get isMobile() {
-    return this.dd.isMobile();
+    return this.dd.isMobile() || this.isMobileWidth();
   }
 }
