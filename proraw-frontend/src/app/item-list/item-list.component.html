@@ -1,4 +1,4 @@
-<h2 class="data-not-found" *ngIf="!(currentItems$ | async)?.length">
+<h2 class="data-not-found" *ngIf="(currentItems$ | async)?.length === 0">
   В этой категории нет ни одного товара.
 </h2>
 <app-item-card

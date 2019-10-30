@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   searchSubscription: Subscription;
   searchStr: string;
   dataFetched = false;
+  currentUrl: string;
 
   currentCategory: Link;
   currentCategorySubscription: Subscription;
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
+        this.currentUrl = e.url;
         if (this.isMobile) {
           const urls = e.url.split('/').filter(Boolean);
           this.currentCategorySubscription = this.getCurrentCategory(
@@ -146,8 +148,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.dd.isMobile() || this.isMobileWidth();
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   isScrollTopButtonVisible() {
-    return window.pageYOffset >= 400;
+    const regCatalog = /catalog\/\d$/g;
+    const regSearch = /catalog\/search/g;
+    return (
+      window.pageYOffset >= 400 &&
+      (regCatalog.test(this.currentUrl) || regSearch.test(this.currentUrl))
+    );
   }
 }

@@ -74,17 +74,18 @@
   }
 }
 
-@media (max-width: 900px){
-  .item{
+@media (max-width: 900px) {
+  .item {
     .item__h3 {
       font-size: 1.5rem;
     }
-  
+
     .item__table-tr .item__table-td:last-child {
       text-align: right;
     }
-  
+
     .item__table {
+      font-size: 0.9rem;
       margin-bottom: 1rem;
     }
   }
