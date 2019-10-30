@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Item } from './item';
 import { catchError, map, tap, filter } from 'rxjs/operators';
 import { Category } from './category';
+import { LoaderService } from './loader.service';
 
 const domen = 'http://a0348460.xsph.ru';
 // const domen = 'http://localhost:4000';
@@ -15,7 +16,7 @@ export class CatalogDataService {
   private categories: Category[];
   private items: { [key: string]: Item[] } = {};
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private ls: LoaderService) {}
 
   getСategories(): Observable<Category[]> {
     if (Array.isArray(this.categories)) {
@@ -71,6 +72,7 @@ export class CatalogDataService {
     if (this.items && this.items[categoryId] && this.items[categoryId].length) {
       return of(this.items[categoryId]);
     }
+    this.ls.setLoaderStatus(true);
     return this.httpClient.get<Item[]>(`${domen}/api/items/${categoryId}`).pipe(
       map(items => {
         return items.filter(item => {
@@ -92,11 +94,13 @@ export class CatalogDataService {
     categoryId: number
   ): Observable<Item> {
     return this.getItemsByCategoryId(categoryId).pipe(
-      map(items => items.find(item => item.IDItem === itemId))
+      map(items => items.find(item => item.IDItem === itemId)),
+      tap(_ => this.ls.setLoaderStatus(false))
     );
   }
 
   getSearchedData(str: string): Observable<Item[]> {
+    this.ls.setLoaderStatus(true);
     return this.httpClient.get<Item[]>(`${domen}/api/search/${str}`).pipe(
       catchError(err => {
         console.log(err.message);

@@ -14,6 +14,7 @@ import { CatalogDataService } from './catalog-data.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Link } from './broad-crumb';
 import { Category } from './category';
+import { LoaderService } from './loader.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,8 @@ import { Category } from './category';
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
+  currentLoaderStatus = false;
+  currentLoaderStatusSubscription: Subscription;
   searchPlaceholder = 'Поиск по каталогу';
   searchSubscription: Subscription;
   searchStr: string;
@@ -41,7 +44,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private cd: CatalogDataService,
-    private dd: DeviceDetectorService
+    private dd: DeviceDetectorService,
+    private ls: LoaderService
   ) {}
 
   @HostListener('window:resize')
@@ -50,6 +54,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.currentLoaderStatusSubscription = this.ls.loaderStatus$.subscribe(
+      d => {
+        setTimeout(() => {
+          this.currentLoaderStatus = d;
+        });
+      }
+    );
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
@@ -58,9 +69,13 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           const urls = e.url.split('/').filter(Boolean);
           this.currentCategorySubscription = this.getCurrentCategory(
             urls
-          ).subscribe(cur => (this.currentCategory = cur));
+          ).subscribe(cur => {
+            this.currentCategory = cur;
+          });
           this.currentPageSubscription = this.getCurrentPage(urls).subscribe(
-            cur => (this.currentPage = cur)
+            cur => {
+              this.currentPage = cur;
+            }
           );
         }
         if (!e.url.includes('search') && !!this.searchInput) {
@@ -104,6 +119,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.searchSubscription.unsubscribe();
+    this.currentLoaderStatusSubscription.unsubscribe();
     if (this.isMobile) {
       this.currentCategorySubscription.unsubscribe();
       this.currentPageSubscription.unsubscribe();
@@ -155,6 +171,15 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     return (
       window.pageYOffset >= 400 &&
       (regCatalog.test(this.currentUrl) || regSearch.test(this.currentUrl))
+    );
+  }
+
+  get isShowAppCatalogList() {
+    return (
+      this.isNotMobile ||
+      (this.currentPage &&
+        this.currentPage.link === 'catalog' &&
+        !this.currentCategory)
     );
   }
 }

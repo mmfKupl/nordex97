@@ -34,14 +34,15 @@
   }
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
   .item-page {
     .item__table-tr .item__table-td:last-child {
       text-align: right;
     }
-  
+
     .item__table {
       margin-bottom: 1rem;
+      font-size: 1rem;
     }
   }
 }

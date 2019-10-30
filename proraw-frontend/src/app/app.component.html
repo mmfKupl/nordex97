@@ -64,9 +64,13 @@
   <app-catalog-list
     [class.mobile]="isMobile"
     [isMobile]="isMobile"
-    *ngIf="isNotMobile || (currentPage?.link === 'catalog' && !currentCategory)"
+    *ngIf="isShowAppCatalogList"
   ></app-catalog-list>
   <section class="section catalog">
+    <app-loader
+      *ngIf="currentLoaderStatus"
+      [class.mobile]="isMobile"
+    ></app-loader>
     <router-outlet></router-outlet>
   </section>
   <input

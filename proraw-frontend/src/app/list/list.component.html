@@ -18,7 +18,7 @@
     <ul
       class="main__ul-expand"
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
-      *ngIf="category.Subs && category.Subs.length > 0"
+      *ngIf="category?.Subs?.length > 0"
       [ngStyle]="{
         'height.px': getExpandStyle(
           category.Subs.length,

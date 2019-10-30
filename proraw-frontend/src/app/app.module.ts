@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +18,7 @@ import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
 import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,8 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     RequisitesComponent,
     AboutPageComponent,
     DeliveryPageComponent,
-    MobileMenuComponent
+    MobileMenuComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -43,10 +43,6 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     HttpClientModule,
     DeviceDetectorModule.forRoot(),
     ScrollToModule.forRoot()
-
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-    //   dataEncapsulation: false
-    // })
   ],
   providers: [],
   bootstrap: [AppComponent]
