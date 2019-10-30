@@ -73,3 +73,19 @@
     margin-bottom: 1rem;
   }
 }
+
+@media (max-width: 900px){
+  .item{
+    .item__h3 {
+      font-size: 1.5rem;
+    }
+  
+    .item__table-tr .item__table-td:last-child {
+      text-align: right;
+    }
+  
+    .item__table {
+      margin-bottom: 1rem;
+    }
+  }
+}

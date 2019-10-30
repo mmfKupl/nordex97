@@ -105,3 +105,18 @@ strong {
     margin-bottom: 1rem;
   }
 }
+
+@media (max-width: 900px){
+  .item-page {
+    .item-page__h1 {
+      font-size: 1.5rem;
+    }
+    .item-page__h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .item-page__ul {
+      margin-bottom: 1rem;
+    }
+  }
+}

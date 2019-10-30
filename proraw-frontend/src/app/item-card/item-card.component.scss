@@ -16,6 +16,16 @@
   }
 }
 
+@media (max-width: 900px){
+  :host{
+    width: 100%;
+    padding: 0.5rem 1rem;
+    .item__wrapper {
+      padding: 1rem;
+    }
+  }
+}
+
 .item__wrapper {
   width: 100%;
   min-height: 9rem;
