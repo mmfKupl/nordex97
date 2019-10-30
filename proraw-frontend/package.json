@@ -27,6 +27,7 @@
     "@angular/router": "~8.1.1",
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@nicky-lenaers/ngx-scroll-to": "^3.0.1",
     "angular-in-memory-web-api": "^0.9.0",
     "express": "^4.15.2",
     "mssql": "^5.1.0",

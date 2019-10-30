@@ -145,4 +145,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   get isMobile() {
     return this.dd.isMobile() || this.isMobileWidth();
   }
+
+  @HostListener('window:scroll', ['$event'])
+  isScrollTopButtonVisible() {
+    return window.pageYOffset >= 400;
+  }
 }

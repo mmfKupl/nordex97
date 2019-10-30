@@ -31,7 +31,7 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-attachment: fixed;
-  background-size: cover;
+  height: 100%;
 }
 
 a {
@@ -51,6 +51,11 @@ ol {
 strong {
   font-weight: bold;
 }
+
+.data-not-found {
+  margin: 2rem 0 0 2rem;
+}
+
 .item-page {
   width: 100%;
   display: flex;
@@ -106,7 +111,7 @@ strong {
   }
 }
 
-@media (max-width: 900px){
+@media (max-width: 900px) {
   .item-page {
     .item-page__h1 {
       font-size: 1.5rem;

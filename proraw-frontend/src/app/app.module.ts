@@ -19,6 +19,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
 import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    ScrollToModule.forRoot()
+
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
     //   dataEncapsulation: false
     // })

@@ -1,3 +1,6 @@
+<h2 class="data-not-found" *ngIf="!(currentItems$ | async)?.length">
+  В этой категории нет ни одного товара.
+</h2>
 <app-item-card
   [class.mobile]="isMobile"
   *ngFor="let item of currentItems$ | async; let i = index"

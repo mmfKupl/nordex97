@@ -3,7 +3,7 @@
   [isOpen]="mobileMenuOpenStatus"
   (isOpenChanges)="onMobileStatusChanged($event)"
 ></app-mobile-menu>
-<header class="header" [class.mobile]="isMobile">
+<header class="header" [class.mobile]="isMobile" #header>
   <div class="header__info" *ngIf="isNotMobile">
     <div class="wrapper">
       <a class="header__info-a" href="tel:84999678699">8 499 967-86-99</a>
@@ -69,4 +69,12 @@
   <section class="section catalog">
     <router-outlet></router-outlet>
   </section>
+  <input
+    [ngx-scroll-to]="header"
+    [ngx-scroll-to-duration]="200"
+    [ngx-scroll-to-easing]="'easeInQuad'"
+    class="button main__button-to-top"
+    type="button"
+    *ngIf="isScrollTopButtonVisible()"
+  />
 </main>
