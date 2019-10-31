@@ -4,9 +4,12 @@ import {
   ViewChild,
   AfterViewInit,
   ElementRef,
+  PLATFORM_ID,
   OnDestroy,
-  HostListener
+  HostListener,
+  Inject
 } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { fromEvent, Subscription, of, combineLatest, Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
@@ -31,25 +34,33 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   dataFetched = false;
   currentUrl: string;
 
+  isBrowser: boolean;
+  isServer: boolean;
+
   currentCategory: Link;
   currentCategorySubscription: Subscription;
 
   currentPage: Link;
   currentPageSubscription: Subscription;
 
-  // TODO:
-  // when all stuff will work -> change to false
   mobileMenuOpenStatus = false;
 
   constructor(
+    @Inject(PLATFORM_ID) platformId: object,
     private router: Router,
     private cd: CatalogDataService,
     private dd: DeviceDetectorService,
     private ls: LoaderService
-  ) {}
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+    this.isServer = isPlatformServer(platformId);
+  }
 
   @HostListener('window:resize')
   isMobileWidth() {
+    if (this.isServer) {
+      return false;
+    }
     return window.innerWidth <= 900;
   }
 
@@ -118,11 +129,19 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.searchSubscription && this.searchSubscription.unsubscribe();
-    this.currentLoaderStatusSubscription && this.currentLoaderStatusSubscription.unsubscribe();
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
+    }
+    if (this.currentLoaderStatusSubscription) {
+      this.currentLoaderStatusSubscription.unsubscribe();
+    }
     if (this.isMobile) {
-      this.currentCategorySubscription && this.currentCategorySubscription.unsubscribe();
-      this.currentPageSubscription && this.currentPageSubscription.unsubscribe();
+      if (this.currentCategorySubscription) {
+        this.currentCategorySubscription.unsubscribe();
+      }
+      if (this.currentPageSubscription) {
+        this.currentPageSubscription.unsubscribe();
+      }
     }
   }
 
@@ -166,6 +185,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:scroll')
   isScrollTopButtonVisible() {
+    if (this.isServer) {
+      return false;
+    }
     const regCatalog = /catalog\/\d$/g;
     const regSearch = /catalog\/search/g;
     return (

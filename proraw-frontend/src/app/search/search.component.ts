@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CatalogDataService } from '../catalog-data.service';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -6,7 +14,6 @@ import { Observable, Subscription, of } from 'rxjs';
 import { Item } from '../item';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { LoaderService } from '../loader.service';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -14,10 +21,10 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  isServer: boolean;
   items: Item[] = [];
   itemsSubscription: Subscription;
   currentLoadStatus$: Observable<boolean> = of(false);
-  isBrowser: boolean;
 
   constructor(
     @Inject(PLATFORM_ID) platformId: object,
@@ -25,7 +32,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     private cd: CatalogDataService,
     private dd: DeviceDetectorService,
     private ls: LoaderService
-  ) { this.isBrowser = isPlatformBrowser(platformId)}
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   ngOnInit() {
     this.currentLoadStatus$ = this.ls.loaderStatus$;
@@ -41,15 +50,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.itemsSubscription && this.itemsSubscription.unsubscribe();
+    if (this.itemsSubscription) {
+      this.itemsSubscription.unsubscribe();
+    }
   }
 
   get isMobileWidth() {
-    if(this.isBrowser){
-      return window.innerWidth <= 900;
-    }else{
+    if (this.isServer) {
       return false;
     }
+    return window.innerWidth <= 900;
   }
 
   get isMobile() {

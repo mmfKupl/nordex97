@@ -3,8 +3,11 @@ import {
   OnInit,
   OnDestroy,
   Input,
-  HostListener
+  HostListener,
+  PLATFORM_ID,
+  Inject
 } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -19,15 +22,19 @@ import { LoaderService } from '../loader.service';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit, OnDestroy {
+  isServer: boolean;
   currentItems: Item[] = [];
   currentItemsSubscription: Subscription;
   currentLoadStatus$: Observable<boolean>;
   constructor(
+    @Inject(PLATFORM_ID) platformId: object,
     private cd: CatalogDataService,
     private route: ActivatedRoute,
     private dd: DeviceDetectorService,
     private ls: LoaderService
-  ) {}
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   ngOnInit() {
     this.currentLoadStatus$ = this.ls.loaderStatus$;
@@ -43,10 +50,15 @@ export class ItemListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.currentItemsSubscription && this.currentItemsSubscription.unsubscribe();
+    if (this.currentItemsSubscription) {
+      this.currentItemsSubscription.unsubscribe();
+    }
   }
 
   get isMobileWidth() {
+    if (this.isServer) {
+      return false;
+    }
     return window.innerWidth <= 900;
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, PLATFORM_ID, Inject } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 class Requisite {
   name: string;
@@ -14,7 +15,13 @@ class Requisite {
   styleUrls: ['./requisites.component.scss']
 })
 export class RequisitesComponent implements OnInit {
-  constructor(private dd: DeviceDetectorService) {}
+  isServer: boolean;
+  constructor(
+    @Inject(PLATFORM_ID) platformId: object,
+    private dd: DeviceDetectorService
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   requisites: Requisite[] = [
     { name: 'ОГРН', text: '1166733073418' },
@@ -51,6 +58,9 @@ export class RequisitesComponent implements OnInit {
   ngOnInit() {}
 
   get isMobileWidth() {
+    if (this.isServer) {
+      return false;
+    }
     return window.innerWidth <= 900;
   }
 

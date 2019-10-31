@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~8.1.1",
     "@angular/platform-server": "~8.1.1",
     "@angular/router": "~8.1.1",
+    "@nguniversal/common": "^8.1.1",
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@nicky-lenaers/ngx-scroll-to": "^3.0.1",

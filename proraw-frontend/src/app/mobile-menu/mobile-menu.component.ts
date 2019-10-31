@@ -1,4 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ReturnStatement } from '@angular/compiler';
 
@@ -10,8 +19,14 @@ import { ReturnStatement } from '@angular/compiler';
 export class MobileMenuComponent implements OnInit {
   @Input() isOpen = false;
   @Output() isOpenChanges = new EventEmitter<boolean>(false);
+  isServer: boolean;
 
-  constructor(private dd: DeviceDetectorService) {}
+  constructor(
+    @Inject(PLATFORM_ID) platformId: object,
+    private dd: DeviceDetectorService
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   ngOnInit() {}
 
@@ -31,6 +46,9 @@ export class MobileMenuComponent implements OnInit {
   }
 
   get isMobileWidth() {
+    if (this.isServer) {
+      return false;
+    }
     return window.innerWidth <= 900;
   }
 
@@ -38,8 +56,11 @@ export class MobileMenuComponent implements OnInit {
     return this.dd.isMobile() || this.isMobileWidth;
   }
 
-  get mobileHeight(){
-    let vh = window.innerHeight;
+  get mobileHeight() {
+    if (this.isServer) {
+      return `100vh`;
+    }
+    const vh = window.innerHeight;
     return `${vh}px`;
   }
 }

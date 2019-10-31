@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  PLATFORM_ID,
+  Inject
+} from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { CatalogDataService } from '../catalog-data.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Item } from '../item';
@@ -11,6 +19,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit, OnDestroy {
+  isServer: boolean;
   currentCategoryId: number;
   curentItemId: number;
   curentItem: Item | any;
@@ -18,10 +27,13 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   getItemSubscription: Subscription;
   constructor(
+    @Inject(PLATFORM_ID) platformId: object,
     private cd: CatalogDataService,
     private route: ActivatedRoute,
     private dd: DeviceDetectorService
-  ) {}
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   ngOnInit() {
     this.currentCategoryId = +this.route.snapshot.url[0].path;
@@ -37,10 +49,15 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getItemSubscription && this.getItemSubscription.unsubscribe();
+    if (this.getItemSubscription) {
+      this.getItemSubscription.unsubscribe();
+    }
   }
 
   get isMobileWidth() {
+    if (this.isServer) {
+      return false;
+    }
     return window.innerWidth <= 900;
   }
 
