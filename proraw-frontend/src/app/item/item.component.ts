@@ -37,7 +37,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getItemSubscription.unsubscribe();
+    this.getItemSubscription && this.getItemSubscription.unsubscribe();
   }
 
   get isMobileWidth() {
