@@ -29,7 +29,13 @@ export class CatalogDataService {
           if (el.Expand) {
             const eidel = maped.find(mel => mel.ExpandId === el.Expand);
             if (Array.isArray(eidel.Subs)) {
-              eidel.Subs.push(el);
+              if (
+                !eidel.Subs.find(
+                  fe => fe.Title === el.Title && fe.IDCategory === el.IDCategory
+                )
+              ) {
+                eidel.Subs.push(el);
+              }
             } else {
               eidel.Subs = [el];
             }
