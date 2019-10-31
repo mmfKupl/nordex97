@@ -188,7 +188,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.isServer) {
       return false;
     }
-    const regCatalog = /catalog\/\d$/g;
+    const regCatalog = /catalog\/\d*$/g;
     const regSearch = /catalog\/search/g;
     return (
       window.pageYOffset >= 400 &&
