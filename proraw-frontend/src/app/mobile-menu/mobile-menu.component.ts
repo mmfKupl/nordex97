@@ -39,7 +39,7 @@ export class MobileMenuComponent implements OnInit {
   }
 
   get mobileHeight(){
-    let vh = window.innerHeight * 0.01;
-    return `calc(${vh}px * 100)`;
+    let vh = window.innerHeight;
+    return `${vh}px`;
   }
 }
