@@ -12,6 +12,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Item } from '../item';
 import { Subscription } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-catalog-item',
@@ -22,7 +23,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   isServer: boolean;
   currentCategoryId: number;
   curentItemId: number;
-  curentItem: Item | any;
+  curentItem: Item;
   itemProperty: string[][];
 
   getItemSubscription: Subscription;
@@ -30,7 +31,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) platformId: object,
     private cd: CatalogDataService,
     private route: ActivatedRoute,
-    private dd: DeviceDetectorService
+    private dd: DeviceDetectorService,
+    private readonly meta: MetaService
   ) {
     this.isServer = isPlatformServer(platformId);
   }
@@ -42,6 +44,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       .getItemByIdAndCategoryId(this.curentItemId, this.currentCategoryId)
       .subscribe(data => {
         this.curentItem = data;
+        this.meta.setTitle(this.curentItem.Title);
         this.itemProperty = this.curentItem.Property.split('\n').map(el =>
           el.split('|')
         );
@@ -49,6 +52,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.meta.setTitle('ООО Нордекс 97');
     if (this.getItemSubscription) {
       this.getItemSubscription.unsubscribe();
     }

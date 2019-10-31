@@ -21,6 +21,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { LoaderComponent } from './loader/loader.component';
 
+import { MetaModule, MetaLoader } from '@ngx-meta/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { LoaderComponent } from './loader/loader.component';
     TransferHttpCacheModule,
     CommonModule,
     AppRoutingModule,
+    MetaModule.forRoot(),
     HttpClientModule,
     DeviceDetectorModule.forRoot(),
     ScrollToModule.forRoot()

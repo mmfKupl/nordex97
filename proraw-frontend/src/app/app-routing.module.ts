@@ -7,7 +7,6 @@ import { BlockListComponent } from './block-list/block-list.component';
 import { RequisitesComponent } from './requisites/requisites.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { DeliveryPageComponent } from './delivery-page/delivery-page.component';
-import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
