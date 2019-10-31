@@ -37,4 +37,9 @@ export class MobileMenuComponent implements OnInit {
   get isMobile() {
     return this.dd.isMobile() || this.isMobileWidth;
   }
+
+  get mobileHeight(){
+    let vh = window.innerHeight * 0.01;
+    return `calc(${vh}px * 100)`;
+  }
 }
