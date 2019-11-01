@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-// let { arr } = require('../../proraw');
+let { arr } = require('../../proraw');
 
 const mc = [
   {
@@ -205,8 +205,6 @@ const mc = [
   }
 ];
 
-const config = require('../db.config');
-
 function connect(conn) {
   return new Promise((res, rej) => {
     conn.connect(err => {
@@ -244,10 +242,18 @@ function query(str, params, conn) {
     //   }
     // });
     // for (let item of arr) {
-    //   let { category, title, description, article, property, available } = item;
+    //   let {
+    //     category,
+    //     title,
+    //     description,
+    //     article,
+    //     property,
+    //     keywords,
+    //     available
+    //   } = item;
     //   const res = await query(
-    //     `call AddItem(?, ?, ?, ?, ?, ?)`,
-    //     [category, title, description, article, property, available],
+    //     `call AddItem(?, ?, ?, ?, ?, ?, ?)`,
+    //     [category, title, description, article, property, keywords, available],
     //     conn
     //   );
     //   console.log(res);

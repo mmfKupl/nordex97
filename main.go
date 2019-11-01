@@ -35,6 +35,7 @@ type Item struct {
 	Article     string `json:"article"`
 	Property    string `json:"property"`
 	Available   string `json:"available"`
+	Keywords    string `json:"keywords"`
 }
 
 var sectionsList []Section
@@ -160,12 +161,13 @@ func parseItemPage(url string, wg *sync.WaitGroup, ind int) {
 		return text
 		// return re.ReplaceAllString(text, "")
 	}), "\n")
+	keywords, _ := page.Find("meta[name=\"Keywords\"]").Attr("content")
 
 	available := page.Find(".stock-high.v-product-stock._height").First().Text()
 
 	article = strings.Trim(article, " \n\t")
 
-	item := Item{ind, title, description, article, property, available}
+	item := Item{ind, title, description, article, property, available, keywords}
 	itemsChan <- item
 
 }

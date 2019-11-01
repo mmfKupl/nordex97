@@ -1,4 +1,4 @@
-﻿use a0348460_nordex97_test;
+﻿use a0350381_nordex97;
 
 create table Category (
 	IDCategory int not null AUTO_INCREMENT,
@@ -13,9 +13,10 @@ create table Item (
 	IDItem int not null AUTO_INCREMENT,
 	IDCategory int not null,
 	Title varchar(255) not null,
-	Description varchar(600),
+	Description varchar(1200),
 	VendorCode varchar(20) not null unique,
-	Property varchar(600),
+	Property varchar(2000),
+    Keywords varchar(300) default '',
 	Available bit not null default 0,
 	constraint CS_PK_ItemID primary key(IDItem),
 	constraint CS_FK_ItemIDCategory foreign key(IDCategory) references Category(IDCategory) on delete no action on update cascade
@@ -39,12 +40,13 @@ insert into Category(Title, Sub, ExpandId, Expand) values(Title, Sub, ExpandId, 
 create procedure AddItem(
 IDCategory int,
 Title varchar(255),
-Description varchar(600),
+Description varchar(1200),
 VendorCode varchar(20),
-Property varchar(600),
+Property varchar(2000),
+Keywords varchar(300),
 Available bit)
-insert into Item(IDCategory, Title, Description, VendorCode, Property, Available)
-values(IDCategory, Title, Description, VendorCode, Property, Available);
+insert into Item(IDCategory, Title, Description, VendorCode, Property, Keywords, Available)
+values(IDCategory, Title, Description, VendorCode, Property, Keywords, Available);
 
 
 
