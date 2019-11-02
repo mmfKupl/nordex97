@@ -47,11 +47,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.meta.setTitle(this.curentItem.Title);
         this.meta.setTag(
           'keywords',
-          this.curentItem.Keywords +
-            ', ' +
-            this.curentItem.VendorCode +
-            ', ' +
-            this.curentItem.Title
+          this.curentItem.Keywords + ', ' + this.curentItem.VendorCode
         );
         this.itemProperty = this.curentItem.Property.split('\n').map(el =>
           el.split('|')
