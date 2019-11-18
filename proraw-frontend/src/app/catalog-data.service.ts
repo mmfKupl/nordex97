@@ -7,7 +7,7 @@ import { Category } from './category';
 import { LoaderService } from './loader.service';
 
 const domen = 'https://nordex97.ru';
-// const domen = 'http://a0350381.xsph.ru';
+// const domen = 'https://nordex97.ru';
 
 @Injectable({
   providedIn: 'root'

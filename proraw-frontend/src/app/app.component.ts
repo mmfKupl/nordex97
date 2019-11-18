@@ -76,19 +76,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: any) => {
         this.currentUrl = e.url;
-        if (this.isMobile) {
-          const urls = e.url.split('/').filter(Boolean);
-          this.currentCategorySubscription = this.getCurrentCategory(
-            urls
-          ).subscribe(cur => {
-            this.currentCategory = cur;
-          });
-          this.currentPageSubscription = this.getCurrentPage(urls).subscribe(
-            cur => {
-              this.currentPage = cur;
-            }
-          );
-        }
+        const urls = e.url.split('/').filter(Boolean);
+        this.currentCategorySubscription = this.getCurrentCategory(
+          urls
+        ).subscribe(cur => {
+          this.currentCategory = cur;
+        });
+        this.currentPageSubscription = this.getCurrentPage(urls).subscribe(
+          cur => {
+            this.currentPage = cur;
+          }
+        );
         if (!e.url.includes('search') && !!this.searchInput) {
           this.searchInput.nativeElement.value = null;
           this.searchStr = '';
