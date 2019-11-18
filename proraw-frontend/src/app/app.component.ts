@@ -117,13 +117,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     if (link === 'requisites') {
       return of({ title: 'Реквизиты', link });
     }
-    if (link === 'about') {
-      return of({ title: 'О компании', link });
-    }
     if (link === 'delivery') {
       return of({ title: 'Доставка', link });
     }
-    return null;
+    return of({ title: 'О компании', link });
   }
 
   ngOnDestroy() {

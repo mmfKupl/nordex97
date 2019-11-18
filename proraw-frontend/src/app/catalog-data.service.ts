@@ -18,7 +18,7 @@ export class CatalogDataService {
 
   constructor(private httpClient: HttpClient, private ls: LoaderService) {}
 
-  getСategories(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     if (Array.isArray(this.categories)) {
       return of(this.categories);
     }
@@ -56,7 +56,7 @@ export class CatalogDataService {
   }
 
   getCurrentCategory(categoryId: number): Observable<Category> {
-    return this.getСategories().pipe(
+    return this.getCategories().pipe(
       map(cats => this.flatCategories(cats)),
       map(cats => cats.find(cat => cat.IDCategory === categoryId))
     );

@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   constructor(private cd: CatalogDataService) {}
 
   ngOnInit() {
-    const tempIL = this.cd.getСategories();
+    const tempIL = this.cd.getCategories();
     if (Array.isArray(tempIL)) {
       this.categories = tempIL;
     } else {
