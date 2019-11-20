@@ -60,7 +60,11 @@ export const sqlConn = {
   }
 };
 
-router.get('/api/items', (req, res, next) => {
+router.get('/', (req, res, next) => {
+  res.send('api');
+});
+
+router.get('/items', (req, res, next) => {
   sqlConn
     .getItems()
     .then(data => {
@@ -72,7 +76,7 @@ router.get('/api/items', (req, res, next) => {
     });
 });
 
-router.get('/api/categories', (req, res, next) => {
+router.get('/categories', (req, res, next) => {
   sqlConn
     .getCategory()
     .then(data => {
@@ -84,7 +88,7 @@ router.get('/api/categories', (req, res, next) => {
     });
 });
 
-router.get('/api/items/:categoryId', (req, res, next) => {
+router.get('/items/:categoryId', (req, res, next) => {
   const categoryId = +req.params.categoryId;
   sqlConn
     .getItemsByCategoryId(categoryId)
@@ -97,7 +101,7 @@ router.get('/api/items/:categoryId', (req, res, next) => {
     });
 });
 
-router.get('/api/search/:query', (req, res, next) => {
+router.get('/search/:query', (req, res, next) => {
   sqlConn
     .getSearchData(req.params.query)
     .then(data => {

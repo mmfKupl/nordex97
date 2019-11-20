@@ -19,8 +19,11 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
 import * as express from 'express';
+import * as subdomain from 'express-subdomain';
 import { join } from 'path';
 import { dbrouter } from './db/db';
+import { adminApp } from './admin';
+const vhost = require('vhost');
 
 // Express server
 const app = express();
@@ -35,6 +38,8 @@ const {
   ngExpressEngine,
   provideModuleMap
 } = require('./dist/server/main');
+
+// app.use(subdomain('admin', adminApp));
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
 app.engine(
@@ -58,18 +63,19 @@ app.get(
   })
 );
 
-app.get('/api', (req, res, next) => {
-  res.send('api');
-});
-app.use(dbrouter);
+app.use('/api', dbrouter);
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
-  console.log('reder');
   res.render('index', { req });
 });
 
 // Start up the Node server
-app.listen(PORT, () => {
-  console.log(`Node Express server listening on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Node Express server listening on http://localhost:${PORT}`);
+// });
+
+express()
+  .use(vhost('nordex97.ru', app))
+  .use(vhost('admin.nordex97.ru', adminApp))
+  .listen(PORT);

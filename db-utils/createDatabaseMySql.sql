@@ -1,5 +1,12 @@
 ﻿use a0350381_nordex97;
 
+create table Admin (
+	IDAdmin int not null auto_increment,
+    Password varchar(600),
+    Login varchar(100),
+    constraint CS_PK_AdminID primary key(IDAdmin)
+);
+
 create table Category (
 	IDCategory int not null AUTO_INCREMENT,
 	Title varchar(30) not null,
@@ -21,6 +28,11 @@ create table Item (
 	constraint CS_PK_ItemID primary key(IDItem),
 	constraint CS_FK_ItemIDCategory foreign key(IDCategory) references Category(IDCategory) on delete no action on update cascade
 );
+
+create procedure GetAdmin(pass varchar(600), login varchar(100))
+select IDAdmin, Login from Admin where login = Login and Password = pass;
+
+
 
 create procedure GetItemByCategoryId(IDCategory int)
 select * from Item where IDCategory = IDCategory;
