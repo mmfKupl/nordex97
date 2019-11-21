@@ -33,30 +33,109 @@ export const sqlConn = {
     await connect(sqlCon);
     return sqlCon;
   },
+  async adminLogIn(login, password) {
+    const conn = await this.init();
+    const data = await query(
+      'call AdminLogIn(?, md5(?))',
+      [login, password],
+      conn
+    );
+    conn.close();
+    return data[0];
+  },
+  async adminLogOut(idAdmin) {
+    const conn = await this.init();
+    const data = await query('call AdminLogOut(?)', [idAdmin], conn);
+    conn.close();
+    return data[0];
+  },
+  async validateAdminAction(idAdmin, sessionKey, conn?) {
+    let flag = false;
+    if (!conn) {
+      flag = true;
+      conn = await this.init();
+    }
+    const data = await query(
+      'call ValidateAdminAction(?, ?)',
+      [idAdmin, sessionKey],
+      conn
+    );
+    if (flag) {
+      conn.close();
+    }
+    return data[0];
+  },
   async getCategory() {
     const conn = await this.init();
     const data = await query('call GetCategoryTable()', [], conn);
-    conn.end();
+    conn.close();
     return data[0];
   },
   async getItems() {
     const conn = await this.init();
     const data = await query('call GetItemTable()', [], conn);
-    conn.end();
+    conn.close();
     return data[0];
   },
   async getItemsByCategoryId(categoryId: number) {
     const conn = await this.init();
     const data = await query('call GetItemByCategoryId(?)', [categoryId], conn);
-    conn.end();
+    conn.close();
     return data[0];
   },
   async getSearchData(queryStr: string) {
     const conn = await this.init();
     queryStr = `%${queryStr}%`;
     const data = await query('call GetSearchData(?)', [queryStr], conn);
-    conn.end();
+    conn.close();
     return data[0];
+  },
+  async createCategoryTable() {
+    const conn = await this.init();
+    const data = await query('call CreateCategoryTable()', [], conn);
+    conn.close();
+    return data;
+  },
+  async addCategory(category, conn) {
+    const data = await query(
+      'call AddCategory(?, ?, ?, ?)',
+      [
+        category.Title || null,
+        category.Sub || null,
+        category.ExpandId || null,
+        category.Expand || null
+      ],
+      conn
+    );
+    return data;
+  },
+  async addItem(item, conn) {
+    const data = await query(
+      'call AddItem(?, ?, ?, ?, ?, ?, ?)',
+      [
+        item.IDCategory || null,
+        item.Title || null,
+        item.Description || null,
+        item.VendorCode || null,
+        item.Property || null,
+        item.Keywords || null,
+        item.Available || null
+      ],
+      conn
+    );
+    return data;
+  },
+  async createItemTable() {
+    const conn = await this.init();
+    const data = await query('call createItemTable()', [], conn);
+    conn.close();
+    return data;
+  },
+  async dropTable(tableName = '') {
+    const conn = await this.init();
+    const res = await query(`drop table ${tableName}`, [], conn);
+    conn.close();
+    return res;
   }
 };
 

@@ -1,1 +1,21 @@
-<p>auth-page works!</p>
+<form>
+  <mat-form-field>
+    <input
+      name="login"
+      matInput
+      placeholder="Логин"
+      type="text"
+      [(ngModel)]="login"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      name="password"
+      matInput
+      placeholder="Пароль"
+      type="password"
+      [(ngModel)]="password"
+    />
+  </mat-form-field>
+  <button mat-raised-button (click)="auth()">Войти</button>
+</form>

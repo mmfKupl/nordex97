@@ -1,0 +1,234 @@
+<?xml version='1.0'?>
+<categories>
+    <category>
+        <IDCategory>1</IDCategory>
+        <Title>АБС пластики (ABS, ASA)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>2</IDCategory>
+        <Title>Полиэтилены</Title>
+        <Sub>0</Sub>
+        <ExpandId>1</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>3</IDCategory>
+        <Title>ПНД (HDPE)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>1</Expand>
+    </category>
+    <category>
+        <IDCategory>4</IDCategory>
+        <Title>ПВД (LDPE)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>1</Expand>
+    </category>
+    <category>
+        <IDCategory>5</IDCategory>
+        <Title>ПЭСП (MDPE)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>1</Expand>
+    </category>
+    <category>
+        <IDCategory>6</IDCategory>
+        <Title>ЛПЭНП (LLDPE)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>1</Expand>
+    </category>
+    <category>
+        <IDCategory>7</IDCategory>
+        <Title>Полипропилены (PP)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>8</IDCategory>
+        <Title>Полистиролы</Title>
+        <Sub>0</Sub>
+        <ExpandId>6</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>9</IDCategory>
+        <Title>Общего назначения (GPPS)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>6</Expand>
+    </category>
+    <category>
+        <IDCategory>10</IDCategory>
+        <Title>Ударопрочные (HIPS)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>6</Expand>
+    </category>
+    <category>
+        <IDCategory>11</IDCategory>
+        <Title>Вспенивающиеся (EPS)</Title>
+        <Sub>1</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>6</Expand>
+    </category>
+    <category>
+        <IDCategory>12</IDCategory>
+        <Title>Красители для полимеров</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>13</IDCategory>
+        <Title>Добавки для полимеров</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>14</IDCategory>
+        <Title>Поливинилхлориды (PVC)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>15</IDCategory>
+        <Title>Пластикаты ПВХ</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>16</IDCategory>
+        <Title>Поликарбонаты (PC)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>17</IDCategory>
+        <Title>Полиэтилентерефталаты (PET)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>18</IDCategory>
+        <Title>Полиамиды (ПА)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>19</IDCategory>
+        <Title>Полиуретаны (PU)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>20</IDCategory>
+        <Title>Полиметилметакрилаты (ПММА)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>21</IDCategory>
+        <Title>Полиформальдегиды</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>22</IDCategory>
+        <Title>Полиолефины (ПОФ)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>23</IDCategory>
+        <Title>Эластомеры</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>24</IDCategory>
+        <Title>Прессматериалы (PM)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>25</IDCategory>
+        <Title>Мономеры</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>26</IDCategory>
+        <Title>Термопласты</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>27</IDCategory>
+        <Title>Фенопласты (FP)</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>28</IDCategory>
+        <Title>Бор</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>29</IDCategory>
+        <Title>Воски</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>30</IDCategory>
+        <Title>Реактивы</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>31</IDCategory>
+        <Title>Органические растворители</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>32</IDCategory>
+        <Title>Каучуки синтетические</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+    <category>
+        <IDCategory>33</IDCategory>
+        <Title>Химическое сырье</Title>
+        <Sub>0</Sub>
+        <ExpandId>null</ExpandId>
+        <Expand>null</Expand>
+    </category>
+</categories>

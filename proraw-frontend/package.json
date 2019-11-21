@@ -49,10 +49,13 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "body-parser": "^1.19.0",
     "codelyzer": "^5.0.0",
+    "connect-busboy": "0.0.2",
     "express-subdomain": "^1.0.5",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
+    "js2xmlparser": "^4.0.0",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
@@ -63,7 +66,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.0",
+    "xml2js": "^0.4.22",
+    "xml2json": "^0.11.2"
   },
   "engines": {
     "node": "10.15.0",

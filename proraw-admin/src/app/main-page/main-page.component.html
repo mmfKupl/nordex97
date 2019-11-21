@@ -1,1 +1,24 @@
-<p>main-page works!</p>
+<button (click)="downloadFileCategories()" mat-raised-button>
+  Выгрузить Категории
+</button>
+<button (click)="downloadFileItems()" mat-raised-button>
+  Выгрузить Товары
+</button>
+<label class="hidden" #fileBtnC for="fileC">
+  <input
+    (change)="onFileChange($event.target.files[0], 'categories')"
+    id="fileC"
+    type="file"
+  />
+</label>
+<button (click)="fileBtnC.click()" mat-raised-button>Обновить Категории</button>
+
+<label class="hidden" #fileBtn for="file">
+  <input
+    (change)="onFileChange($event.target.files[0], 'items')"
+    id="file"
+    type="file"
+  />
+</label>
+<button (click)="fileBtn.click()" mat-raised-button>Обновить Товары</button>
+<button (click)="checkStatus()" mat-raised-button>Проверить статус</button>

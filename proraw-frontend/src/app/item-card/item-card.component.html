@@ -1,5 +1,8 @@
 <div class="item">
   <a
+    [ngx-scroll-to]="'header'"
+    [ngx-scroll-to-duration]="100"
+    [ngx-scroll-to-easing]="'easeInQuad'"
     class="item__wrapper"
     [routerLink]="['../../catalog', itemCategoryId, itemId]"
   >

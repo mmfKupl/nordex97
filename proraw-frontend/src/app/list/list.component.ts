@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { CatalogDataService } from '../catalog-data.service';
 import { Category } from 'src/app/category';
 

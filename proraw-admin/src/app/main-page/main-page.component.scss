@@ -1,0 +1,12 @@
+button {
+  margin: 10px;
+}
+
+.hidden {
+  visibility: hidden;
+  width: 0;
+  z-index: -1;
+  input {
+    width: 0;
+  }
+}

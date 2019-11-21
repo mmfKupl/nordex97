@@ -7,6 +7,9 @@
       [class.sub]="category.Sub"
       [class.expand]="curExpandId[category.ExpandId] === category.ExpandId"
       (click)="category.ExpandId ? setCurExpand(category.ExpandId) : null"
+      [ngx-scroll-to]="'header'"
+      [ngx-scroll-to-duration]="100"
+      [ngx-scroll-to-easing]="'easeInQuad'"
     >
       {{ category.Title }}
       <span
@@ -37,6 +40,9 @@
           [routerLink]="['catalog', subCat.IDCategory]"
           routerLinkActive="active"
           [class.sub]="subCat.Sub"
+          [ngx-scroll-to]="0"
+          [ngx-scroll-to-duration]="200"
+          [ngx-scroll-to-easing]="'easeInQuad'"
           >{{ subCat.Title }}</a
         >
       </li>
